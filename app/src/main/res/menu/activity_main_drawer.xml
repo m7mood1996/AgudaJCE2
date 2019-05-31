@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon_nav"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_post"
+            android:icon="@drawable/post_icon_nav"
+            android:title="@string/menu_posts" />
+        <item
+            android:id="@+id/nav_event"
+            android:icon="@drawable/event_icon_nav"
+            android:title="@string/menu_events" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/login_icon_nav"
+            android:title="@string/menu_login" />
+        <item
+            android:id="@+id/nav_marathon"
+            android:icon="@drawable/marathon_icon_nav"
+            android:title="@string/menu_marathon" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/about_icon_nav"
+            android:title="@string/menu_about" />
+
+    </group>
+
+
+
+</menu>

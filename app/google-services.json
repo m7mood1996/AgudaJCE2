@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "557980352773",
+    "firebase_url": "https://aguda-eec6c.firebaseio.com",
+    "project_id": "aguda-eec6c",
+    "storage_bucket": "aguda-eec6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557980352773:android:882731add6a4a66a",
+        "android_client_info": {
+          "package_name": "com.example.agudajce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557980352773-f87ui6io6alak12cmligc82aiu85ghuu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agudajce",
+            "certificate_hash": "497f3448e3cde6b3d0bb13e9f00abbc3aecef205"
+          }
+        },
+        {
+          "client_id": "557980352773-gke2gn7ecomrmn8st6lqgu54ra66gqpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOJnNdqb0dio5NRqK_Ii0YfDi6KxqoLoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557980352773-gke2gn7ecomrmn8st6lqgu54ra66gqpo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
