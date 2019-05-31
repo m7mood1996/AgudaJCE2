@@ -1,13 +1,11 @@
 package com.example.agudajce;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import java.io.InputStream;
@@ -39,7 +36,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public MyAdapter(List<Post> postList) {
         this.postList = postList;
-
     }
 
     @Override
@@ -53,9 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Post post = postList.get(position);
-        String des = post.getDescription();
-
-        holder.textView.setText(des);
+        holder.textView.setText(post.getDescription());
 
         new DownloadImageFromInternet((ImageView) holder.imageView)
                 .execute(post.getImage());

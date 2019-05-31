@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        String accessToken = "EAAF8xbp4sd4BAEgb6JIMdxG3W7t9w1ZAOcMHno5fKDS2T8OZC5KW245BujzSHBZAFyDud5ZCBjIZBwPYTHydIj6lBJDr5C7iMf6kCbAgA87GbIoNDbzyZAysgc0fSlyrndM7ZCJo5sS4dqSPDV65ZBc1io9cW6zNEY6MmKJwU1wF9976bbS15WYTiIikktz7dkC4piBf3yXUHR0Hd2TLHhQJWsec4BZAGhtqjwqp18bCSbQZDZD";
+        String accessToken = "EAAF8xbp4sd4BAF19WG7BAQ7Kwo0vtzTDfYFroM2MiLIW5y0x9fhyhZAKFUkzpCRdOyZAXMKDklQN1IZCxImr5jzT28zkPGWKu2DRIVDZBlSB8drk9FWCcINiRMJez48edHp84P6mZBJSN3jCn33AWrrud1sFfk246v43xQbPfsEVRoSZAIsyirOAoHloNQmkNmZCspOnsZAdcQZDZD";
         String appId = "418663655584222";
         String userId = "2350432641906028";
         Collection<String> permissions = new ArrayList<>();
@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity
                 new GraphRequest.Callback() {
                     @Override
                     public void onCompleted(GraphResponse response) {
-
                        JSONObject jsonObject = response.getJSONObject();
-                       prepareData(jsonObject);
+
+                        prepareData(jsonObject);
 
 
                     }
