@@ -4,8 +4,8 @@ package com.example.agudajce;
 
 public class Post {
 
-    public String description;
-    public String image;
+    private String description;
+    private String image;
 
 
     public Post(String description, String image) {

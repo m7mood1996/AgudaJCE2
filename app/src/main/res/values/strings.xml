@@ -8,6 +8,14 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+
+
+    <string name="accessToken">EAAF8xbp4sd4BANXLhX70HigF8r2KoZB8gZBhjIbIDlqisQULQZCfKhnAuruNZAouqzgT3yfbR1S0egqkWaR3omGEE9WWPPkeZCQ5ATVZC8V39ZCSywK1clJQyEcZCwGVqWRxX97wlOMlDYzRcpdBMXKu6698kcXj9CjiZCh899VAa7sUaDonygCy1ybgZCCAyK2fIZD</string>
+    <string name="appId">418663655584222</string>
+    <string name="userId">2350432641906028</string>
+
+
+
     <string name="menu_home">Home</string>
     <string name="menu_posts">Posts</string>
     <string name="menu_events">Events</string>

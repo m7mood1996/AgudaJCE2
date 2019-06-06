@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,9 +24,9 @@ import android.widget.Button;
 
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenSource;
+
 import com.facebook.GraphRequest;
-import com.facebook.GraphRequestAsyncTask;
+
 import com.facebook.GraphResponse;
 
 import org.json.JSONException;
@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import java.util.Collection;
-import java.util.Iterator;
+
 import java.util.List;
 
 
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        String accessToken = "EAAF8xbp4sd4BAF19WG7BAQ7Kwo0vtzTDfYFroM2MiLIW5y0x9fhyhZAKFUkzpCRdOyZAXMKDklQN1IZCxImr5jzT28zkPGWKu2DRIVDZBlSB8drk9FWCcINiRMJez48edHp84P6mZBJSN3jCn33AWrrud1sFfk246v43xQbPfsEVRoSZAIsyirOAoHloNQmkNmZCspOnsZAdcQZDZD";
-        String appId = "418663655584222";
-        String userId = "2350432641906028";
+        String accessToken = getString(R.string.accessToken);;
+        String appId = getString(R.string.appId);
+        String userId = getString(R.string.userId);
         Collection<String> permissions = new ArrayList<>();
         permissions.add("manage_pages");
         AccessToken token = new AccessToken(accessToken, appId, userId,  null, null, null, null, null, null,null);
