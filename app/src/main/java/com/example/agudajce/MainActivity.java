@@ -38,8 +38,6 @@ import java.util.Collection;
 
 import java.util.List;
 
-
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -146,6 +144,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_event) {
             openEvents();
         } else if (id == R.id.nav_login) {
+            openLogin();
 
         } else if (id == R.id.nav_about) {
             openAboutus();
@@ -154,9 +153,14 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void openLogin(){
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
     }
     public  void openPost() {
         Intent i = new Intent(this, PostsActivity.class);
@@ -164,7 +168,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public  void openEvents() {
-        Intent i = new Intent(this, EventsActivity.class);
+        Intent i = new Intent(this, AlbumActivity.class);
         startActivity(i);
     }
     public  void openAboutus() {

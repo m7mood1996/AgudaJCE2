@@ -2,12 +2,9 @@ package com.example.agudajce;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -17,8 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Gallery;
-import android.widget.GridView;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -31,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class EventsActivity extends AppCompatActivity
+public class AlbumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private List<Gallery_row> gallery = new ArrayList<>();
@@ -48,7 +43,7 @@ public class EventsActivity extends AppCompatActivity
         AccessToken token = new AccessToken(accessToken, appId, userId,  null, null, null, null, null, null,null);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_events);
+        setContentView(R.layout.activity_album);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -104,7 +99,7 @@ public class EventsActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.events, menu);
+        getMenuInflater().inflate(R.menu.album, menu);
         return true;
     }
 

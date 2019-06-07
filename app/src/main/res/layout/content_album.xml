@@ -10,8 +10,8 @@
     android:layout_height="match_parent"
     
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".EventsActivity"
-    tools:showIn="@layout/app_bar_events">
+    tools:context=".AlbumActivity"
+    tools:showIn="@layout/app_bar_album">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gallery_recycler_view"

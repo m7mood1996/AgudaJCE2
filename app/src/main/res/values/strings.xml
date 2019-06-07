@@ -9,11 +9,9 @@
     <string name="action_settings">Settings</string>
 
 
-
-    <string name="accessToken">EAAF8xbp4sd4BANXLhX70HigF8r2KoZB8gZBhjIbIDlqisQULQZCfKhnAuruNZAouqzgT3yfbR1S0egqkWaR3omGEE9WWPPkeZCQ5ATVZC8V39ZCSywK1clJQyEcZCwGVqWRxX97wlOMlDYzRcpdBMXKu6698kcXj9CjiZCh899VAa7sUaDonygCy1ybgZCCAyK2fIZD</string>
+    <string name="accessToken">EAAF8xbp4sd4BAN2lz1O4PPLWvTTMk1cd5AYFPxRvMRxOd1Q21e1xriZACyZBXZCvVyHTwh5ZBQmqikpMP3EstuzGuCHVr4ahE2QUNUx8ZAxLfnJaG1uZCdJ93UG8D1t7A2fU7pMHvBQg3xCDpW9tcba5jFpUyCjRaRZBBPxhDFs5z9NbH1CvGNzpZAPacO8AFy7frovgJQzExjG45AC5BZCBlTZBSa42QddfdX14NTDQ1JrAZDZD</string>
     <string name="appId">418663655584222</string>
     <string name="userId">2350432641906028</string>
-
 
 
     <string name="menu_home">Home</string>
@@ -37,12 +35,14 @@
 
     <string-array name="android_virsions">
 
-    <item>Cup cake</item>
-    <item>hello</item>
-    <item>my</item>
-    <item>name</item>
-    <item>is</item>
-    <item>mahmood</item>
+        <item>Cup cake</item>
+        <item>hello</item>
+        <item>my</item>
+        <item>name</item>
+        <item>is</item>
+        <item>mahmood</item>
 
     </string-array>
+    <string name="title_activity_login">Login</string>
+    <string name="login_name">login name</string>
 </resources>
