@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.view.Menu;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -40,7 +41,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
+    public boolean admin_mode = false;
     private List<Post> postList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MyAdapter mAdapter;
@@ -60,8 +61,26 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            admin_mode = (boolean) extras.get("Admin_Mode");
+
+        }
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        if(admin_mode == true){
+
+
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin_panel).setVisible(true);
+            nav_Menu.findItem(R.id.nav_sign_out).setVisible(true);
+
+
+        }
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -159,25 +178,37 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
     public void openLogin(){
-        Intent i = new Intent(this, Login.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), Login.class);
+        intent.putExtra("Admin_Mode", admin_mode);
+        startActivity(intent);
+
     }
     public  void openPost() {
-        Intent i = new Intent(this, PostsActivity.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), PostsActivity.class);
+        intent.putExtra("Admin_Mode", admin_mode);
+        startActivity(intent);
+
     }
 
     public  void openEvents() {
-        Intent i = new Intent(this, AlbumActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(getBaseContext(), AlbumActivity.class);
+        intent.putExtra("Admin_Mode", admin_mode);
+        startActivity(intent);
+
     }
     public  void openAboutus() {
-        Intent i = new Intent(this, AboutUsActivity.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), AboutUsActivity.class);
+        intent.putExtra("Admin_Mode", admin_mode);
+        startActivity(intent);
     }
     public  void openMarathon() {
-        Intent i = new Intent(this, MarathonsActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        intent.putExtra("Admin_Mode", admin_mode);
+        startActivity(intent);
+
     }
 
 

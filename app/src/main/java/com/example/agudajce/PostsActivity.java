@@ -14,7 +14,7 @@ import android.view.Menu;
 
 public class PostsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    boolean admin_mode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +24,23 @@ public class PostsActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            admin_mode = (boolean) extras.get("Admin_Mode");
+
+        }
+        if(admin_mode == true){
+
+
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin_panel).setVisible(true);
+            nav_Menu.findItem(R.id.nav_sign_out).setVisible(true);
+
+
+        }
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -62,6 +79,8 @@ public class PostsActivity extends AppCompatActivity
             openEvents();
 
         } else if (id == R.id.nav_login) {
+            finish();
+            openLogin();
 
         } else if (id == R.id.nav_about) {
             finish();
@@ -76,6 +95,10 @@ public class PostsActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void openLogin(){
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
     }
     public  void openPost() {
         Intent i = new Intent(this, PostsActivity.class);

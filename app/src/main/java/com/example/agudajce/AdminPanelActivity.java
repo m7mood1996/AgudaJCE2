@@ -2,6 +2,9 @@ package com.example.agudajce;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -12,18 +15,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-public class AboutUsActivity extends AppCompatActivity
+public class AdminPanelActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public boolean admin_mode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+
+        setContentView(R.layout.activity_admin_panel);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
+
 
         Bundle extras = getIntent().getExtras();
 
@@ -40,6 +46,7 @@ public class AboutUsActivity extends AppCompatActivity
 
 
         }
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -60,10 +67,9 @@ public class AboutUsActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.about_us, menu);
+        getMenuInflater().inflate(R.menu.admin_panel, menu);
         return true;
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -76,24 +82,28 @@ public class AboutUsActivity extends AppCompatActivity
         } else if (id == R.id.nav_post) {
             finish();
             openPost();
-        } else if (id == R.id.nav_event) {
-            finish();
-            openEvents();
 
         } else if (id == R.id.nav_login) {
             finish();
             openLogin();
 
-        }else if(id == R.id.nav_marathon){
+
+        } else if (id == R.id.nav_about) {
+            finish();
+            openAboutus();
+
+        } else if (id == R.id.nav_marathon) {
             finish();
             openMarathon();
+
         }
+
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     public void openLogin(){
         Intent i = new Intent(this, Login.class);
         startActivity(i);
@@ -103,13 +113,15 @@ public class AboutUsActivity extends AppCompatActivity
         startActivity(i);
     }
 
-    public  void openEvents() {
-        Intent i = new Intent(this, AlbumActivity.class);
+
+    public  void openAboutus() {
+        Intent i = new Intent(this, AboutUsActivity.class);
         startActivity(i);
     }
-
     public  void openMarathon() {
         Intent i = new Intent(this, MarathonsActivity.class);
         startActivity(i);
     }
+
+
 }

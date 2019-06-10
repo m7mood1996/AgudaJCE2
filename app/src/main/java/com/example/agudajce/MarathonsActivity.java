@@ -66,6 +66,9 @@ public class MarathonsActivity extends AppCompatActivity
             openEvents();
 
         } else if (id == R.id.nav_login) {
+            finish();
+            openLogin();
+
 
         } else if (id == R.id.nav_about) {
             finish();
@@ -75,6 +78,11 @@ public class MarathonsActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openLogin(){
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
     }
     public  void openPost() {
         Intent i = new Intent(this, PostsActivity.class);

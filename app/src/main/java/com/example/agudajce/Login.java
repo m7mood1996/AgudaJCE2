@@ -2,6 +2,7 @@ package com.example.agudajce;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -16,15 +17,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class Login extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
+    public boolean admin_mode = false;
     TextView username;
     TextView password;
     TextView usernameError;
     TextView PasswordError;
     Button signin;
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,25 @@ public class Login extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            admin_mode = (boolean) extras.get("Admin_Mode");
+
+        }
+        if(admin_mode == true){
+
+
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin_panel).setVisible(true);
+            nav_Menu.findItem(R.id.nav_sign_out).setVisible(true);
+
+
+        }
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -48,6 +76,7 @@ public class Login extends AppCompatActivity
 
         signin = findViewById(R.id.signin_btn);
         signin.setOnClickListener(this);
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
     }
@@ -131,22 +160,48 @@ public class Login extends AppCompatActivity
 
         }
     }
-    public boolean fieldsErrors(){ // if username or password are illegal inputs
+    public void fieldsErrors(){ // if username or password are illegal inputs and connect to firebase and find if username and password are correct
         String usr =username.getText().toString();
         String pass = password.getText().toString();
         System.out.println(" fuck yeah"+(username.getText().toString().length()));
         int indexx = usr.indexOf("@");
 
         if(usr == null || usr.length() == 0)
-            usernameError.setText("* Incorrect! email is empty");
+            usernameError.setText("* Incorrect! E-mail is empty");
         else if(indexx == -1) {
-            usernameError.setText("* Incorrect! email must contain @ sign");
+            usernameError.setText("* Incorrect! E-mail must contain @ sign");
         }
         if(pass == null || pass.length() == 0)
             PasswordError.setText("* Incorrect! Password is empty");
 
 
-        return false;
+        else {
+            firebaseAuth.signInWithEmailAndPassword(usr, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        finish();
+                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.putExtra("Admin_Mode", true);
+                        startActivity(intent);
+
+                        Intent intent1 = new Intent(getBaseContext(), AdminPanelActivity.class);
+                        intent1.putExtra("Admin_Mode", true);
+                        startActivity(intent);
+
+                    } else {
+                        usernameError.setText("");
+                        PasswordError.setText("");
+                        Toast.makeText(getApplicationContext(), "E-mail or password is wrong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+
     }
+
+
 
 }
