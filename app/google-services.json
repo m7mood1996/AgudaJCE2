@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "445104021386",
+    "firebase_url": "https://agudajce-ios.firebaseio.com",
+    "project_id": "agudajce-ios",
+    "storage_bucket": "agudajce-ios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445104021386:android:882731add6a4a66a",
+        "android_client_info": {
+          "package_name": "com.example.agudajce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445104021386-av1rknpr3ovl9clh9ukslmuqqkv4oq56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agudajce",
+            "certificate_hash": "497f3448e3cde6b3d0bb13e9f00abbc3aecef205"
+          }
+        },
+        {
+          "client_id": "445104021386-l22la0fnufd2qbdgcdng8o6o63300l5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRiQ8HAHQ0VJunMseHAdeSyih_9wOvhAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445104021386-l22la0fnufd2qbdgcdng8o6o63300l5j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "445104021386-pus9fk680hm9hidt2hpo7dl3n1kqap70.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pavelpetrenko.Facebook-login-Test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
