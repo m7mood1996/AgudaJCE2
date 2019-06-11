@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        /*
         Button fb = findViewById(R.id.fb_logo);
         Button insta = findViewById(R.id.insta_logo);
         Button dropbox = findViewById(R.id.drop_logo);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         fb.setOnClickListener(this);
         insta.setOnClickListener(this);
         dropbox.setOnClickListener(this);
-
+*/
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -230,7 +232,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         Intent brows;
         switch (v.getId()){
-
+/*
             case R.id.fb_logo:
                 brows= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/aguda.jce/"));
                 startActivity(brows);
@@ -245,7 +247,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(brows);
 
                 break;
-
+*/
             default:
                 break;
         }

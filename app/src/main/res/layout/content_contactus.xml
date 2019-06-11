@@ -1,17 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ContactUsActivity"
     tools:showIn="@layout/app_bar_contactus">
-    
-    <Gallery
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/gallery"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/massenger_logo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/icon_massenger"
+
+            />
+        <Button
+            android:id="@+id/fb_logo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/iconfinder_facebook_circle_color_107175" />
+
+        <Button
+            android:id="@+id/insta_logo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/instagram_circle" />
+
+        <Button
+            android:id="@+id/drop_logo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/dropbox_4550858" />
+        <Button
+            android:id="@+id/whatsapp_logo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/whatsapp_icone"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/phoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:text="0000000000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:text="מספר טלפון של המסרד :"
+            android:textDirection="rtl"
+            android:paddingRight="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/xxxxxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="שעות פעילות של המשרד"
+            android:textSize="24dp"
+            android:textColor="#000"
+
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:padding="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/boarder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/dayS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:textDirection="ltr"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/daySText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="'א"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:padding="2dp"
+        android:background="@drawable/boarder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/dayM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:textDirection="ltr"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/dayMText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="'ב"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:padding="2dp"
+        android:background="@drawable/boarder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/dayT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/dayTText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="'ג"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:padding="2dp"
+        android:background="@drawable/boarder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/dayW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/dayWText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:text="'ד"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:padding="2dp"
+        android:background="@drawable/boarder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/dayT2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/dayT2Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:text="'ה"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/boarder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        >
+
+        <TextView
+            android:id="@+id/dayF"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:text="סגור"
+            android:textAlignment="center"
+            android:textDirection="ltr" />
+
+        <TextView
+            android:id="@+id/dayFText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:text="יום שישי וערבי חג"
+            android:textDirection="ltr"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <Button
+            android:id="@+id/gmail_logo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/iconfinder_gmail_1220367" />
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:textAlignment="center"
+            android:layout_height="match_parent"
+            android:textDirection="rtl"
+            android:text="לשליחת מייל "/>
+
+
+    </LinearLayout>
+
+
+
+
 
 
 </LinearLayout>

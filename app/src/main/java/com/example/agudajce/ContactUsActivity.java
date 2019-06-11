@@ -1,6 +1,7 @@
 package com.example.agudajce;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,9 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 public class ContactUsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
 
     private boolean admin_mode = false;
@@ -43,11 +46,61 @@ public class ContactUsActivity extends AppCompatActivity
 
         }
 
+        Button fb = findViewById(R.id.fb_logo);
+        Button insta = findViewById(R.id.insta_logo);
+        Button dropbox = findViewById(R.id.drop_logo);
+        Button massenger = findViewById(R.id.massenger_logo);
+        Button whatsapp = findViewById(R.id.whatsapp_logo);
+
+        fb.setOnClickListener(this);
+        insta.setOnClickListener(this);
+        dropbox.setOnClickListener(this);
+        massenger.setOnClickListener(this);
+        whatsapp.setOnClickListener(this);
+
+
+
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void onClick(View v) {
+        Intent brows;
+        switch (v.getId()){
+
+            case R.id.fb_logo:
+                brows= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/aguda.jce/"));
+                startActivity(brows);
+                break;
+            case R.id.insta_logo:
+                brows = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/aguda.jce?igshid=1roen5wayrk79"));
+                startActivity(brows);
+
+                break;
+            case R.id.drop_logo:
+                brows = new Intent(Intent.ACTION_VIEW, Uri.parse("http://dropagudajce.co.il"));
+                startActivity(brows);
+
+                break;
+            case R.id.massenger_logo:
+                brows = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.messenger.com/t/aguda.jce"));
+                startActivity(brows);
+                break;
+
+            case R.id.whatsapp_logo:
+                brows = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.whatsapp.com"));
+                startActivity(brows);
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     @Override
