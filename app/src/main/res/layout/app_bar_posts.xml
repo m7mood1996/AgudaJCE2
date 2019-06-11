@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#C62828"
-            app:title="Posts"
+            app:title="צור קשר"
 
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 

@@ -32,13 +32,13 @@
             android:id="@+id/nav_admin_panel"
             android:icon="@drawable/login_icon_nav"
             android:visible="false"
-            android:title="Admin Panel" />
+            android:title="לוח בקרה" />
 
         <item
             android:id="@+id/nav_sign_out"
             android:icon="@drawable/login_icon_nav"
             android:visible="false"
-            android:title="Sign Out" />
+            android:title="יציאה" />
 
     </group>
 
