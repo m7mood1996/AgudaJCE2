@@ -2,9 +2,6 @@ package com.example.agudajce;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -79,9 +76,9 @@ public class AdminPanelActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             finish();
-        } else if (id == R.id.nav_post) {
+        } else if (id == R.id.nav_contactus) {
             finish();
-            openPost();
+            openContactUs();
 
         } else if (id == R.id.nav_login) {
             finish();
@@ -118,9 +115,9 @@ public class AdminPanelActivity extends AppCompatActivity
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
-    public  void openPost() {
+    public  void openContactUs() {
 
-        Intent intent = new Intent(getBaseContext(), PostsActivity.class);
+        Intent intent = new Intent(getBaseContext(), ContactUsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }

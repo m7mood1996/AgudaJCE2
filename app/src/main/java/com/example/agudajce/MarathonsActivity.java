@@ -74,9 +74,9 @@ public class MarathonsActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             finish();
-        } else if (id == R.id.nav_post) {
+        } else if (id == R.id.nav_contactus) {
             finish();
-            openPost();
+            openContactUs();
         } else if (id == R.id.nav_event) {
             finish();
             openAlbum();
@@ -127,9 +127,9 @@ public class MarathonsActivity extends AppCompatActivity
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
-    public  void openPost() {
+    public  void openContactUs() {
 
-        Intent intent = new Intent(getBaseContext(), PostsActivity.class);
+        Intent intent = new Intent(getBaseContext(), ContactUsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }

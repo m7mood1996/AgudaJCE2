@@ -157,8 +157,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_post) {
-            openPost();
+        } else if (id == R.id.nav_contactus) {
+            openContactUs();
 
         } else if (id == R.id.nav_event) {
             openEvents();
@@ -198,9 +198,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
 
     }
-    public  void openPost() {
+    public  void openContactUs() {
 
-        Intent intent = new Intent(getBaseContext(), PostsActivity.class);
+        Intent intent = new Intent(getBaseContext(), ContactUsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
 
