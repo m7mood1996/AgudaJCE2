@@ -44,6 +44,6 @@
 
     </string-array>
     <string name="title_activity_login">Login</string>
-    <string name="login_name">login name</string>
+    <string name="login_name">Email </string>
     <string name="title_activity_admin_panel">AdminPanelActivity</string>
 </resources>

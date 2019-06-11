@@ -9,25 +9,26 @@
             android:icon="@drawable/home_icon_nav"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_contactus"
-            android:icon="@drawable/post_icon_nav"
-            android:title="@string/menu_posts" />
-        <item
             android:id="@+id/nav_event"
-            android:icon="@drawable/event_icon_nav"
+            android:icon="@drawable/gallery_app"
             android:title="@string/menu_events" />
-        <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/login_icon_nav"
-            android:title="@string/menu_login" />
+
         <item
             android:id="@+id/nav_marathon"
             android:icon="@drawable/marathon_icon_nav"
             android:title="@string/menu_marathon" />
         <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/contact_us"
+            android:title="@string/menu_posts" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/about_icon_nav"
             android:title="@string/menu_about" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/login_icon_nav"
+            android:title="@string/menu_login" />
         <item
             android:id="@+id/nav_admin_panel"
             android:icon="@drawable/login_icon_nav"
