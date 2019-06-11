@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    public boolean admin_mode = false;
+    private boolean admin_mode = false;
     TextView username;
     TextView password;
     TextView usernameError;
@@ -49,10 +49,10 @@ public class Login extends AppCompatActivity
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
-            admin_mode = (boolean) extras.get("Admin_Mode");
+            setAdmin_mode((boolean) extras.get("Admin_Mode"));
 
         }
-        if(admin_mode == true){
+        if(isAdmin_mode() == true){
 
 
             Menu nav_Menu = navigationView.getMenu();
@@ -127,29 +127,63 @@ public class Login extends AppCompatActivity
             finish();
             openAlbum();
 
+        }else if(id == R.id.nav_sign_out){
+            setAdmin_mode(false);
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            intent.putExtra("Admin_Mode", isAdmin_mode());
+            finish();
+            startActivity(intent);
+        } else if(id == R.id.nav_admin_panel){
+            finish();
+            openAdminPanel();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void  openAdminPanel(){
+        Intent intent = new Intent(getBaseContext(), AdminPanelActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
 
-
-    public  void openPost() {
-        Intent i = new Intent(this, PostsActivity.class);
-        startActivity(i);
     }
+
+
     public  void openAlbum() {
-        Intent i = new Intent(this, AlbumActivity.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), AlbumActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
+
+
+    public void openLogin(){
+
+        Intent intent = new Intent(getBaseContext(), Login.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
+    }
+    public  void openPost() {
+
+        Intent intent = new Intent(getBaseContext(), PostsActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
+    }
+
+
     public  void openAboutus() {
-        Intent i = new Intent(this, AboutUsActivity.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), AboutUsActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
     public  void openMarathon() {
-        Intent i = new Intent(this, MarathonsActivity.class);
-        startActivity(i);
+
+
+        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
 
     @Override
@@ -180,15 +214,17 @@ public class Login extends AppCompatActivity
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        finish();
-                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        setAdmin_mode(true);
+
+                        finishAffinity(); // finish all the previose activities
+
                         Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         intent.putExtra("Admin_Mode", true);
                         startActivity(intent);
 
                         Intent intent1 = new Intent(getBaseContext(), AdminPanelActivity.class);
                         intent1.putExtra("Admin_Mode", true);
-                        startActivity(intent);
+                        startActivity(intent1);
 
                     } else {
                         usernameError.setText("");
@@ -200,6 +236,14 @@ public class Login extends AppCompatActivity
         }
 
 
+    }
+
+    public boolean isAdmin_mode() {
+        return admin_mode;
+    }
+
+    public void setAdmin_mode(boolean admin_mode) {
+        this.admin_mode = admin_mode;
     }
 
 

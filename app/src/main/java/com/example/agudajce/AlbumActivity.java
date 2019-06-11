@@ -28,7 +28,7 @@ import java.util.List;
 
 public class AlbumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private boolean admin_mode = false;
     private List<Gallery_row> gallery = new ArrayList<>();
     private RecyclerView recyclerView;
     private GalleryAdapter galleryAdapter;
@@ -49,6 +49,22 @@ public class AlbumActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            setAdmin_mode((boolean) extras.get("Admin_Mode"));
+
+        }
+        if(isAdmin_mode() == true){
+
+
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin_panel).setVisible(true);
+            nav_Menu.findItem(R.id.nav_sign_out).setVisible(true);
+            nav_Menu.findItem(R.id.nav_login).setVisible(false);
+
+        }
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -130,29 +146,55 @@ public class AlbumActivity extends AppCompatActivity
             finish();
             openMarathon();
 
+        }else if(id == R.id.nav_sign_out){
+            setAdmin_mode(false);
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            intent.putExtra("Admin_Mode", isAdmin_mode());
+            finish();
+            startActivity(intent);
+        } else if(id == R.id.nav_admin_panel){
+            finish();
+            openAdminPanel();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void  openAdminPanel(){
+        Intent intent = new Intent(getBaseContext(), AdminPanelActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
+
+    }
+
     public void openLogin(){
-        Intent i = new Intent(this, Login.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), Login.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
     public  void openPost() {
-        Intent i = new Intent(this, PostsActivity.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), PostsActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
 
 
     public  void openAboutus() {
-        Intent i = new Intent(this, AboutUsActivity.class);
-        startActivity(i);
+
+        Intent intent = new Intent(getBaseContext(), AboutUsActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
     public  void openMarathon() {
-        Intent i = new Intent(this, MarathonsActivity.class);
-        startActivity(i);
+
+
+        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
 
     void prepareData(JSONObject jsonObject){
@@ -207,6 +249,12 @@ public class AlbumActivity extends AppCompatActivity
         }
     }
 
+    public boolean isAdmin_mode() {
+        return admin_mode;
+    }
 
+    public void setAdmin_mode(boolean admin_mode) {
+        this.admin_mode = admin_mode;
+    }
 
 }
