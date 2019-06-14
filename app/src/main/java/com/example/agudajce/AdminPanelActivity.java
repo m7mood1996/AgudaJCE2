@@ -11,10 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class AdminPanelActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private boolean admin_mode = false;
+    Button submet_changes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,10 @@ public class AdminPanelActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        submet_changes = (Button)findViewById(R.id.submet_changes_Contact_us);
+        submet_changes.setOnClickListener(this);
     }
 
     @Override
@@ -145,4 +153,98 @@ public class AdminPanelActivity extends AppCompatActivity
         this.admin_mode = admin_mode;
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+
+            case R.id.submet_changes_Contact_us:
+                findErrorsInputs();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    public void findErrorsInputs(){
+        TextView textView;
+
+        textView = (TextView)findViewById(R.id.newNumber) ; //new phone number
+        String newPhoneNum =  textView.getText().toString();
+
+        textView = (TextView)findViewById(R.id.newEmail) ;  // new email
+        String newEmail = textView.getText().toString();
+
+        textView = (TextView)findViewById(R.id.newSOpen) ;  // reshon day
+        String reshon_opening =textView.getText().toString(); // opening
+        textView = (TextView)findViewById(R.id.newSClosing) ;//closing
+        String reshon_closing =textView.getText().toString();
+
+        textView = (TextView)findViewById(R.id.newMOpening) ;  // shenyy day
+        String sheny_opening =textView.getText().toString(); // opening
+        textView = (TextView)findViewById(R.id.newMClosing) ;//closing
+        String sheny_colsing =textView.getText().toString();
+
+        textView = (TextView)findViewById(R.id.newTOpening) ;  // shlyshy day
+        String shlyshy_opening =textView.getText().toString(); // opening
+        textView = (TextView)findViewById(R.id.newTClosing) ;//closing
+        String shlyshy_closing =textView.getText().toString();
+
+        textView = (TextView)findViewById(R.id.newWOpening) ;  // reveey day
+        String reveey_opening =textView.getText().toString(); // opening
+        textView = (TextView)findViewById(R.id.newWClosing) ;//closing
+        String reveey_closing =textView.getText().toString();
+
+        textView = (TextView)findViewById(R.id.newT2Opening) ;  // hamshy day
+        String hamshy_opening =textView.getText().toString(); // opening
+        textView = (TextView)findViewById(R.id.newT2Closing) ;//closing
+        String hamshy_closing =textView.getText().toString();
+
+
+        if(newPhoneNum.isEmpty() == false){
+
+        }
+        if(newEmail.isEmpty() == false){
+
+        }
+        if(reshon_opening.isEmpty() == false){
+
+        }
+        if(reshon_closing.isEmpty() == false){
+
+        }
+        if(sheny_opening.isEmpty() == false){
+
+        }
+        if(sheny_colsing.isEmpty() == false){
+
+        }
+        if(shlyshy_opening.isEmpty() == false){
+
+        }
+        if(shlyshy_closing.isEmpty() == false){
+
+        }
+        if(reveey_opening.isEmpty() == false){
+
+        }
+        if(reveey_closing.isEmpty() == false){
+
+        }
+        if(hamshy_opening.isEmpty() == false){
+
+        }
+        if(hamshy_closing.isEmpty() == false){
+
+        }
+
+
+
+
+
+
+
+    }
 }

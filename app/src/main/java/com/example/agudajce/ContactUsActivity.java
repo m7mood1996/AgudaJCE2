@@ -1,10 +1,16 @@
 package com.example.agudajce;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -14,12 +20,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class ContactUsActivity extends AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Struct;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ContactUsActivity<my_String> extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
 
+
     private boolean admin_mode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +56,11 @@ public class ContactUsActivity extends AppCompatActivity
 
         Bundle extras = getIntent().getExtras();
 
-        if(extras != null) {
-            setAdmin_mode( (boolean) extras.get("Admin_Mode"));
+        if (extras != null) {
+            setAdmin_mode((boolean) extras.get("Admin_Mode"));
 
         }
-        if(isAdmin_mode() == true){
+        if (isAdmin_mode() == true) {
 
 
             Menu nav_Menu = navigationView.getMenu();
@@ -46,35 +70,38 @@ public class ContactUsActivity extends AppCompatActivity
 
         }
 
-        Button fb = findViewById(R.id.fb_logo);
-        Button insta = findViewById(R.id.insta_logo);
-        Button dropbox = findViewById(R.id.drop_logo);
-        Button massenger = findViewById(R.id.massenger_logo);
-        Button whatsapp = findViewById(R.id.whatsapp_logo);
-
+        Button fb = (Button) findViewById(R.id.fb_logo);
+        Button insta = (Button)findViewById(R.id.insta_logo);
+        Button dropbox = (Button)findViewById(R.id.drop_logo);
+        Button massenger = (Button)findViewById(R.id.massenger_logo);
+        Button whatsapp = (Button)findViewById(R.id.whatsapp_logo);
+        Button sendmail = (Button)findViewById(R.id.gmail_logo);
+        TextView phone =(TextView)findViewById(R.id.phoneNum) ;
         fb.setOnClickListener(this);
         insta.setOnClickListener(this);
         dropbox.setOnClickListener(this);
         massenger.setOnClickListener(this);
         whatsapp.setOnClickListener(this);
-
-
-
-
+        sendmail.setOnClickListener(this);
+        phone.setOnClickListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        System.out.println("\t\thello bb\t\t");
+
+
+        fetchDataFromFireBase();
     }
 
     public void onClick(View v) {
         Intent brows;
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.fb_logo:
-                brows= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/aguda.jce/"));
+                brows = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/aguda.jce/"));
                 startActivity(brows);
                 break;
             case R.id.insta_logo:
@@ -95,6 +122,15 @@ public class ContactUsActivity extends AppCompatActivity
             case R.id.whatsapp_logo:
                 brows = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.whatsapp.com"));
                 startActivity(brows);
+                break;
+
+            case R.id.gmail_logo:
+                sendemail();
+                break;
+
+
+            case R.id.phoneNum:
+                callPhone();
                 break;
 
             default:
@@ -129,7 +165,7 @@ public class ContactUsActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             finish();
-        }else if (id == R.id.nav_event) {
+        } else if (id == R.id.nav_event) {
             finish();
             openAlbum();
 
@@ -145,13 +181,13 @@ public class ContactUsActivity extends AppCompatActivity
             finish();
             openMarathon();
 
-        }else if(id == R.id.nav_sign_out){
+        } else if (id == R.id.nav_sign_out) {
             setAdmin_mode(false);
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             intent.putExtra("Admin_Mode", isAdmin_mode());
             finish();
             startActivity(intent);
-        } else if(id == R.id.nav_admin_panel){
+        } else if (id == R.id.nav_admin_panel) {
             finish();
             openAdminPanel();
         }
@@ -160,14 +196,15 @@ public class ContactUsActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void  openAdminPanel(){
+
+    public void openAdminPanel() {
         Intent intent = new Intent(getBaseContext(), AdminPanelActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
 
     }
 
-    public  void openAlbum() {
+    public void openAlbum() {
 
         Intent intent = new Intent(getBaseContext(), AlbumActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
@@ -175,13 +212,14 @@ public class ContactUsActivity extends AppCompatActivity
     }
 
 
-    public void openLogin(){
+    public void openLogin() {
 
         Intent intent = new Intent(getBaseContext(), Login.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
-    public  void openPost() {
+
+    public void openPost() {
 
         Intent intent = new Intent(getBaseContext(), ContactUsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
@@ -189,13 +227,14 @@ public class ContactUsActivity extends AppCompatActivity
     }
 
 
-    public  void openAboutus() {
+    public void openAboutus() {
 
         Intent intent = new Intent(getBaseContext(), AboutUsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
-    public  void openMarathon() {
+
+    public void openMarathon() {
 
 
         Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
@@ -210,4 +249,204 @@ public class ContactUsActivity extends AppCompatActivity
     public void setAdmin_mode(boolean admin_mode) {
         this.admin_mode = admin_mode;
     }
+
+    public void fetchDataFromFireBase() {
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+
+        // get data about email
+
+
+        myRef.child("contactUsPage/officeEmail").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                //((String) snapshot.getValue());
+              //  My_String m = new  My_String(((String) snapshot.getValue()));
+               // strings.add(m);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        // get data about phone num
+
+        myRef.child("contactUsPage/officeNumber").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.phoneNum);
+                textView.setText(((String) snapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        myRef.child("contactUsPage/officeOpenTime/hamishi").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.dayT2);
+                textView.setText(((String) snapshot.getValue()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        myRef.child("contactUsPage/officeOpenTime/revii").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.dayW);
+                textView.setText(((String) snapshot.getValue()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        myRef.child("contactUsPage/officeOpenTime/rishon").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.dayS);
+                textView.setText(((String) snapshot.getValue()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        myRef.child("contactUsPage/officeOpenTime/sheni").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.dayM);
+                textView.setText(((String) snapshot.getValue()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        myRef.child("contactUsPage/officeOpenTime/shishi").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.dayF);
+                textView.setText(((String) snapshot.getValue()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        myRef.child("contactUsPage/officeOpenTime/shlishi").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(R.id.dayT);
+                textView.setText(((String) snapshot.getValue()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
+
+
+    public void sendemail(){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        myRef.child("contactUsPage/officeEmail").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                //((String) snapshot.getValue());
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "email.@gmail.com", null));
+
+                startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
+
+    public void callPhone(){
+
+
+        TextView phone =(TextView)findViewById(R.id.phoneNum) ;
+        String phone_no= phone.getText().toString().replaceAll("-", "");
+
+
+
+
+
+
+
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    Integer.parseInt("123"));
+        } else {
+            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:"+ phone_no)));
+        }
+
+
+    }
+
+
+
+
+
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+            case 123:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    callPhone();
+                } else {
+                    Log.d("TAG", "Call Permission Not Granted");
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
 }
+
