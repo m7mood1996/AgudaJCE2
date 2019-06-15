@@ -260,119 +260,28 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
         // get data about email
 
 
-        myRef.child("contactUsPage/officeEmail").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
 
-                //((String) snapshot.getValue());
-              //  My_String m = new  My_String(((String) snapshot.getValue()));
-               // strings.add(m);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
 
         // get data about phone num
-
-        myRef.child("contactUsPage/officeNumber").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.phoneNum);
-                textView.setText(((String) snapshot.getValue()));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        getDataFromFireBase(myRef , "contactUsPage/officeNumber",R.id.phoneNum);
 
 
-        myRef.child("contactUsPage/officeOpenTime/hamishi").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.dayT2);
-                textView.setText(((String) snapshot.getValue()));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        getDataFromFireBase(myRef , "contactUsPage/officeOpenTime/hamishi",R.id.dayT2);
 
 
-        myRef.child("contactUsPage/officeOpenTime/revii").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.dayW);
-                textView.setText(((String) snapshot.getValue()));
+        getDataFromFireBase(myRef , "contactUsPage/officeOpenTime/revii",R.id.dayW);
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        getDataFromFireBase(myRef , "contactUsPage/officeOpenTime/rishon",R.id.dayS);
 
 
-        myRef.child("contactUsPage/officeOpenTime/rishon").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.dayS);
-                textView.setText(((String) snapshot.getValue()));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        getDataFromFireBase(myRef , "contactUsPage/officeOpenTime/sheni",R.id.dayM);
 
 
-        myRef.child("contactUsPage/officeOpenTime/sheni").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.dayM);
-                textView.setText(((String) snapshot.getValue()));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        getDataFromFireBase(myRef , "contactUsPage/officeOpenTime/shishi",R.id.dayF);
+        getDataFromFireBase(myRef , "contactUsPage/officeOpenTime/shlishi", R.id.dayT );
 
 
-        myRef.child("contactUsPage/officeOpenTime/shishi").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.dayF);
-                textView.setText(((String) snapshot.getValue()));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
-        myRef.child("contactUsPage/officeOpenTime/shlishi").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                TextView textView = (TextView)findViewById(R.id.dayT);
-                textView.setText(((String) snapshot.getValue()));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
     }
 
@@ -428,11 +337,6 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
 
     }
 
-
-
-
-
-
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
 
@@ -448,5 +352,23 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
                 break;
         }
     }
+
+
+    public void getDataFromFireBase(DatabaseReference myRef , String from, final int ids ){
+
+        myRef.child(from).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                TextView textView = (TextView)findViewById(ids);
+                textView.setText(((String) snapshot.getValue()));
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+    }
+
 }
 

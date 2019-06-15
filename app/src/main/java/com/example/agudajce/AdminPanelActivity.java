@@ -14,11 +14,22 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AdminPanelActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private boolean admin_mode = false;
     Button submet_changes;
+    FirebaseDatabase database ;
+    DatabaseReference myRef ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +68,9 @@ public class AdminPanelActivity extends AppCompatActivity
 
         submet_changes = (Button)findViewById(R.id.submet_changes_Contact_us);
         submet_changes.setOnClickListener(this);
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
     }
 
     @Override
@@ -159,7 +173,7 @@ public class AdminPanelActivity extends AppCompatActivity
         switch (id){
 
             case R.id.submet_changes_Contact_us:
-                findErrorsInputs();
+                updateFireBase();
                 break;
 
             default:
@@ -168,34 +182,47 @@ public class AdminPanelActivity extends AppCompatActivity
 
     }
 
-    public void findErrorsInputs(){
+    public void updateFireBase(){
         TextView textView;
 
         textView = (TextView)findViewById(R.id.newNumber) ; //new phone number
         String newPhoneNum =  textView.getText().toString();
 
+        updatePhoneNum(newPhoneNum);
+
         textView = (TextView)findViewById(R.id.newEmail) ;  // new email
         String newEmail = textView.getText().toString();
+
+        updateEmail(newEmail);
+
 
         textView = (TextView)findViewById(R.id.newSOpen) ;  // reshon day
         String reshon_opening =textView.getText().toString(); // opening
         textView = (TextView)findViewById(R.id.newSClosing) ;//closing
         String reshon_closing =textView.getText().toString();
 
+        updateSday(reshon_opening,reshon_closing,"contactUsPage/officeOpenTime/rishon");
+
         textView = (TextView)findViewById(R.id.newMOpening) ;  // shenyy day
         String sheny_opening =textView.getText().toString(); // opening
         textView = (TextView)findViewById(R.id.newMClosing) ;//closing
         String sheny_colsing =textView.getText().toString();
+
+        updateSday(sheny_opening,sheny_colsing,"contactUsPage/officeOpenTime/sheni");
 
         textView = (TextView)findViewById(R.id.newTOpening) ;  // shlyshy day
         String shlyshy_opening =textView.getText().toString(); // opening
         textView = (TextView)findViewById(R.id.newTClosing) ;//closing
         String shlyshy_closing =textView.getText().toString();
 
+        updateSday(shlyshy_opening,shlyshy_closing,"contactUsPage/officeOpenTime/shlishi");
+
         textView = (TextView)findViewById(R.id.newWOpening) ;  // reveey day
         String reveey_opening =textView.getText().toString(); // opening
         textView = (TextView)findViewById(R.id.newWClosing) ;//closing
         String reveey_closing =textView.getText().toString();
+
+        updateSday(reveey_opening,reveey_closing,"contactUsPage/officeOpenTime/revii");
 
         textView = (TextView)findViewById(R.id.newT2Opening) ;  // hamshy day
         String hamshy_opening =textView.getText().toString(); // opening
@@ -203,48 +230,88 @@ public class AdminPanelActivity extends AppCompatActivity
         String hamshy_closing =textView.getText().toString();
 
 
+        updateSday(hamshy_opening,hamshy_closing,"contactUsPage/officeOpenTime/hamishi");
+
+
+
+
+
+    }
+
+    public void updateSday(String open, String close, String to){
+
+
+        if(open.isEmpty() == true && close.isEmpty() == false){
+
+
+            Toast.makeText(this,"one of opening or closing is empty please fill them",Toast.LENGTH_LONG).show();
+        }
+
+        else if(open.isEmpty() == false && close.isEmpty() == true){
+
+
+            Toast.makeText(this,"one of opening or closing is empty please fill them",Toast.LENGTH_LONG).show();
+        }
+        else if(open.isEmpty() == false && close.isEmpty() == false){
+            boolean submit = findIfTime(open,close);
+            if(submit == true)
+                updatedayTime(to,open + " - "+ close);
+
+        }
+
+
+
+    }
+    public boolean findIfTime(String open,String close){
+
+        DateFormat formatter = new SimpleDateFormat("hh:mm");
+        try {
+            Date date = formatter.parse(open);
+            Date date2 = formatter.parse(close);
+            return true;
+        } catch (ParseException e) {
+            e.printStackTrace();
+           return false;
+        }
+
+
+
+    }
+
+    public void updateEmail(String newEmail){
+
+
+        if(newEmail.isEmpty() == false && newEmail.contains("@") == true){
+
+
+
+            myRef.child("contactUsPage/officeEmail").setValue(newEmail);
+            System.out.println("hello\tnewemail\t"+newEmail);
+
+        }
+        else if (newEmail.isEmpty() == false){
+
+            Toast.makeText(this,"Error in Email please provide E-mail with @ asign",Toast.LENGTH_LONG).show();
+
+        }
+
+
+    }
+
+    public void updatePhoneNum(String newPhoneNum){
+
         if(newPhoneNum.isEmpty() == false){
 
-        }
-        if(newEmail.isEmpty() == false){
-
-        }
-        if(reshon_opening.isEmpty() == false){
-
-        }
-        if(reshon_closing.isEmpty() == false){
-
-        }
-        if(sheny_opening.isEmpty() == false){
-
-        }
-        if(sheny_colsing.isEmpty() == false){
-
-        }
-        if(shlyshy_opening.isEmpty() == false){
-
-        }
-        if(shlyshy_closing.isEmpty() == false){
-
-        }
-        if(reveey_opening.isEmpty() == false){
-
-        }
-        if(reveey_closing.isEmpty() == false){
-
-        }
-        if(hamshy_opening.isEmpty() == false){
-
-        }
-        if(hamshy_closing.isEmpty() == false){
+            myRef.child("contactUsPage/officeNumber").setValue(newPhoneNum);
+            System.out.println("hello\tnewNumber\t"+newPhoneNum);
 
         }
 
+    }
 
+    public void updatedayTime(String to,String newTime){
 
-
-
-
+        myRef.child(to).setValue(newTime);
 
     }
 }

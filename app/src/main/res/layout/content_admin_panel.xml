@@ -30,27 +30,29 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="293dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="20dp">
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal">
 
         <EditText
-            android:textAlignment="center"
-            android:hint="@string/_number_hint"
             android:id="@+id/newNumber"
-            android:layout_width="241dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="8"
+            android:hint=""
+
             android:inputType="number"
-            android:importantForAutofill="no" />
+            android:maxLength="10"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="מספר טלפון חדש"
-            android:layout_marginLeft="10dp"/>
+            android:textColor="#000" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,12 +67,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="11"
+            android:ems="8"
             android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
+            android:textColor="#000"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="55dp"
@@ -161,6 +164,7 @@
             android:layout_height="wrap_content"
             android:hint="00:00"
             android:textColor="#000"
+            android:maxLength="5"
             android:textSize="18dp"
             android:textAlignment="center"
             android:inputType="time"
@@ -170,7 +174,7 @@
             android:id="@+id/newSOpen"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-
+            android:maxLength="5"
             android:hint="00:00"
             android:textDirection="ltr"
             android:textColor="#000"
@@ -209,6 +213,7 @@
             android:layout_height="wrap_content"
             android:hint="00:00"
             android:textAlignment="center"
+            android:maxLength="5"
             android:textColor="#000"
             android:textSize="18dp"
             android:inputType="time"/>
@@ -217,7 +222,7 @@
             android:id="@+id/newMOpening"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-
+            android:maxLength="5"
             android:hint="00:00"
             android:textDirection="ltr"
             android:textColor="#000"
@@ -256,6 +261,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:hint="00:00"
+            android:maxLength="5"
             android:inputType="time"
             android:textColor="#000"
             android:textSize="18dp"
@@ -264,7 +270,7 @@
             android:id="@+id/newTOpening"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-
+            android:maxLength="5"
             android:hint="00:00"
             android:textColor="#000"
             android:textSize="18dp"
@@ -301,6 +307,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:inputType="time"
+            android:maxLength="5"
             android:textAlignment="center"
             android:textColor="#000"
             android:textSize="18dp"
@@ -309,7 +316,7 @@
             android:id="@+id/newWOpening"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-
+            android:maxLength="5"
             android:hint="00:00"
             android:textColor="#000"
             android:textSize="18dp"
@@ -348,18 +355,20 @@
             android:inputType="time"
             android:textColor="#000"
             android:textSize="18dp"
+            android:maxLength="5"
             android:textAlignment="center"
             android:hint="00:00"/>
+
         <EditText
             android:id="@+id/newT2Opening"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-
+            android:maxLength="5"
             android:hint="00:00"
+            android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="18dp"
             android:textDirection="ltr"
-            android:textAlignment="center"/>
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/dayT2Text"
