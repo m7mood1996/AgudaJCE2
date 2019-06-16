@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new MyAdapter(postList);
+        mAdapter = new MyAdapter(postList,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "full_picture,message");
+        parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
         request.setParameters(parameters);
         request.executeAsync();
 
@@ -131,6 +131,11 @@ public class MainActivity extends AppCompatActivity
 
 
      //   prepareData();
+
+
+
+
+
     }
 
 
@@ -279,14 +284,45 @@ public class MainActivity extends AppCompatActivity
                 public void run() {
 
                     for(int i =0;i<5;i++){
-
+                        String descri = "";
+                        String pic = "";
+                        String videourl = "";
                         try {
-                        String descri =(jsonObject.getJSONArray("data")).getJSONObject(i).getString("message");
-                        String pic = jsonObject.getJSONArray("data").getJSONObject(i).getString("full_picture");
-                            Post post = new Post(descri,pic);
-                            postList.add(post);
-                        } catch (JSONException e) {
+                            descri = (jsonObject.getJSONArray("data")).getJSONObject(i).getString("message");
+
+                        }
+                        catch (JSONException e) {
+
                             e.printStackTrace();
+
+                        }
+
+                        try{
+                            pic = jsonObject.getJSONArray("data").getJSONObject(i).getString("full_picture");
+                        }
+                        catch (JSONException e){
+                            pic ="";
+
+                        }
+                        try{
+                            videourl = jsonObject.getJSONArray("data").getJSONObject(i).getJSONObject("attachments").getJSONArray("data").getJSONObject(0).getJSONObject("media").getString("source");
+                        }
+                        catch (JSONException e){
+                            videourl = "";
+                        }
+
+
+
+
+                        if(videourl.isEmpty() == false && videourl.contains("video") == false)
+                            videourl = "";
+                        else {
+                           // pic = "";
+
+                            System.out.println("hello\tpic\t"+pic);
+                            System.out.println("hello\tvid\t"+videourl);
+                            Post post = new Post(descri,pic,videourl);
+                            postList.add(post);
                         }
 
 
