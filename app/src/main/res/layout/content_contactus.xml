@@ -75,7 +75,7 @@
             android:textSize="18dp"
             android:textColor="#000"
             android:layout_weight="1"
-            android:text="מספר טלפון של המסרד :"
+            android:text="מספר טלפון של המשרד :"
             android:textDirection="rtl"
             android:paddingRight="10dp"/>
     </LinearLayout>

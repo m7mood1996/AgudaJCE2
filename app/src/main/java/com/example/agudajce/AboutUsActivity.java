@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,8 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import java.util.ArrayList;
+
 public class AboutUsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "AboutUsActivity";
+    private ArrayList<String> mTexts = new ArrayList<>();
+    private ArrayList<String> mImages = new ArrayList<>();
     private boolean admin_mode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,8 @@ public class AboutUsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        getImages();
     }
 
     @Override
@@ -143,5 +153,52 @@ public class AboutUsActivity extends AppCompatActivity
 
     public void setAdmin_mode(boolean admin_mode) {
         this.admin_mode = admin_mode;
+    }
+
+
+    private void getImages(){
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        mImages.add("https://i.ibb.co/tQGJK0F/itai-Circle-Shape.png");
+        mTexts.add("Havasu Falls");
+
+        mImages.add("https://i.ibb.co/zPwcpnR/daniel-Circle-Shape.png");
+        mTexts.add("Trondheim");
+
+        mImages.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+        mTexts.add("Portugal");
+
+        mImages.add("https://i.redd.it/j6myfqglup501.jpg");
+        mTexts.add("Rocky Mountain National Park");
+
+
+        mImages.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+        mTexts.add("Mahahual");
+
+        mImages.add("https://i.redd.it/k98uzl68eh501.jpg");
+        mTexts.add("Frozen Lake");
+
+
+        mImages.add("https://i.redd.it/glin0nwndo501.jpg");
+        mTexts.add("White Sands Desert");
+
+        mImages.add("https://i.ibb.co/zPwcpnR/daniel-Circle-Shape.png");
+        mTexts.add("Austrailia");
+
+        mImages.add("https://i.imgur.com/ZcLLrkY.jpg");
+        mTexts.add("Washington");
+
+        initRecyclerView();
+
+    }
+
+    private void initRecyclerView(){
+        Log.d(TAG, "initRecyclerView: init recyclerview");
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.recycler_View);
+        recyclerView.setLayoutManager(layoutManager);
+        AboutUsRecycle adapter = new AboutUsRecycle(this, mTexts, mImages);
+        recyclerView.setAdapter(adapter);
     }
 }
