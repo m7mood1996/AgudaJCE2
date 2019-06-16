@@ -185,20 +185,20 @@ public class AdminPanelActivity extends AppCompatActivity
     public void updateFireBase(){
         TextView textView;
 
-        textView = (TextView)findViewById(R.id.newNumber) ; //new phone number
+        textView = (TextView)findViewById(R.id.NewNumber) ; //new phone number
         String newPhoneNum =  textView.getText().toString();
 
         updatePhoneNum(newPhoneNum);
 
-        textView = (TextView)findViewById(R.id.newEmail) ;  // new email
+        textView = (TextView)findViewById(R.id.NewEmail) ;  // new email
         String newEmail = textView.getText().toString();
 
         updateEmail(newEmail);
 
 
-        textView = (TextView)findViewById(R.id.newSOpen) ;  // reshon day
+        textView = (TextView)findViewById(R.id.NewSOpen) ;  // reshon day
         String reshon_opening =textView.getText().toString(); // opening
-        textView = (TextView)findViewById(R.id.newSClosing) ;//closing
+        textView = (TextView)findViewById(R.id.NewSClosing) ;//closing
         String reshon_closing =textView.getText().toString();
 
         updateSday(reshon_opening,reshon_closing,"contactUsPage/officeOpenTime/rishon");
