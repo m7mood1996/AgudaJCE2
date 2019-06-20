@@ -316,13 +316,6 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
         TextView phone =(TextView)findViewById(R.id.phoneNum) ;
         String phone_no= phone.getText().toString().replaceAll("-", "");
 
-
-
-
-
-
-
-
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
 
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {

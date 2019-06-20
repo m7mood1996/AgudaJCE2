@@ -1,7 +1,10 @@
 package com.example.agudajce;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,15 +17,39 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 public class AboutUsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "AboutUsActivity";
-    private ArrayList<String> mTexts = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
+    //public static final String Database_Path = "All_Image_Uploads_Database";
+    //private ArrayList<String> mTexts = new ArrayList<>();
+    //private ArrayList<String> mImages = new ArrayList<>();
+
+   ////////example code
+
+    ArrayList<Data> list = new ArrayList<>();
+  /*  RecyclerView recyclerView;
+    DatabaseReference databaseReference;
+    RecyclerView.Adapter adapter ;
+
+    */
+    ///////example code
     private boolean admin_mode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +57,37 @@ public class AboutUsActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ///////example code
+        /*
+        recyclerView = findViewById(R.id.recycler_View);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(AboutUsActivity.this));
+        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                    CycleObject imageUploadInfo = postSnapshot.getValue(CycleObject.class);
+
+                    list.add(imageUploadInfo);
+                }
+
+                adapter = new AboutUsRecycle(getApplicationContext(), list);
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+            */
+        ///////example code
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -157,37 +215,48 @@ public class AboutUsActivity extends AppCompatActivity
 
 
     private void getImages(){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("aboutUsPage").child("agudaOfficeProfessionalSkills");
+
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                //In this case, "shalom" will be stored in mName
+
+
+
+                    Data data = snapshot.getValue(Data.class);
+                    list.add(data);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        System.out.println("hellohello iti\t" + list.get(0).getImageUrl());
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+/*
+        mImages.add(name);
+        mTexts.add(img);
 
-        mImages.add("https://i.ibb.co/tQGJK0F/itai-Circle-Shape.png");
-        mTexts.add("Havasu Falls");
+        mImages.add("");
+        mTexts.add(name);
 
-        mImages.add("https://i.ibb.co/zPwcpnR/daniel-Circle-Shape.png");
-        mTexts.add("Trondheim");
+        mImages.add("");
+        mTexts.add(name);
 
-        mImages.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mTexts.add("Portugal");
-
-        mImages.add("https://i.redd.it/j6myfqglup501.jpg");
-        mTexts.add("Rocky Mountain National Park");
-
-
-        mImages.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mTexts.add("Mahahual");
-
-        mImages.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mTexts.add("Frozen Lake");
-
-
-        mImages.add("https://i.redd.it/glin0nwndo501.jpg");
-        mTexts.add("White Sands Desert");
-
-        mImages.add("https://i.ibb.co/zPwcpnR/daniel-Circle-Shape.png");
-        mTexts.add("Austrailia");
-
-        mImages.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mTexts.add("Washington");
-
+        mImages.add("");
+        mTexts.add("Anas");
+*/
         initRecyclerView();
 
     }
@@ -198,7 +267,71 @@ public class AboutUsActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.recycler_View);
         recyclerView.setLayoutManager(layoutManager);
-        AboutUsRecycle adapter = new AboutUsRecycle(this, mTexts, mImages);
-        recyclerView.setAdapter(adapter);
+        //AboutUsRecycle adapter = new AboutUsRecycle(this, mTexts, mImages);
+        //ecyclerView.setAdapter(adapter);
     }
+
+    public void getDataFromFireBase(DatabaseReference myRef , String from, final int id){
+
+        myRef.child(from).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(id == R.id.textimg) {
+                    TextView text = (TextView) findViewById(id);
+                    text.setText((String) dataSnapshot.getValue());
+
+                }
+
+                if(id == R.id.image_view){
+                    CircleImageView img = (CircleImageView)findViewById(R.id.image_view);
+                    img.setImageURI(Uri.parse((String) dataSnapshot.getValue()));
+
+                    System.out.println("hellohello itaaaaai\t" +(String) dataSnapshot.getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+public class Data{
+        private String imageUrl;
+        private String namee;
+        private String profession;
+
+    public Data(String imageUrl, String namee, String profession) {
+        this.imageUrl = imageUrl;
+        this.namee = namee;
+        this.profession = profession;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getNamee() {
+        return namee;
+    }
+
+    public void setNamee(String namee) {
+        this.namee = namee;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+}
+
+
 }

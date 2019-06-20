@@ -88,16 +88,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        /*
-        Button fb = findViewById(R.id.fb_logo);
-        Button insta = findViewById(R.id.insta_logo);
-        Button dropbox = findViewById(R.id.drop_logo);
-
-        fb.setOnClickListener(this);
-        insta.setOnClickListener(this);
-        dropbox.setOnClickListener(this);
-*/
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         mAdapter = new MyAdapter(postList,this);

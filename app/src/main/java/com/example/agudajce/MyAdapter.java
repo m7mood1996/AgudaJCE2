@@ -39,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public ImageView imageView;
-        public  VideoView videoView; // adding video
+        public VideoView videoView; // adding video
         public ProgressBar progressBar;
 
         public MyViewHolder(View view) {
@@ -141,7 +141,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         else {
             holder.imageView.setVisibility(View.VISIBLE);
             holder.videoView.setVisibility(View.GONE);
-            new DownloadImageFromInternet((ImageView) holder.imageView)
+                    new DownloadImageFromInternet((ImageView) holder.imageView)
                     .execute(post.getImage());
 
         }
