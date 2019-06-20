@@ -1,5 +1,6 @@
 package com.example.agudajce;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,20 +36,15 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 public class AboutUsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "AboutUsActivity";
-    //public static final String Database_Path = "All_Image_Uploads_Database";
-    //private ArrayList<String> mTexts = new ArrayList<>();
-    //private ArrayList<String> mImages = new ArrayList<>();
 
-   ////////example code
+    private LinearLayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private AboutUsRecycle aboutUsRecycle;
 
-    ArrayList<Data> list = new ArrayList<>();
-  /*  RecyclerView recyclerView;
-    DatabaseReference databaseReference;
-    RecyclerView.Adapter adapter ;
+    FirebaseDatabase database;
+    Context contex = this;
 
-    */
-    ///////example code
+
     private boolean admin_mode = false;
 
     @Override
@@ -57,47 +54,17 @@ public class AboutUsActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ///////example code
-        /*
-        recyclerView = findViewById(R.id.recycler_View);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(AboutUsActivity.this));
-        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-
-                    CycleObject imageUploadInfo = postSnapshot.getValue(CycleObject.class);
-
-                    list.add(imageUploadInfo);
-                }
-
-                adapter = new AboutUsRecycle(getApplicationContext(), list);
-                recyclerView.setAdapter(adapter);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-            */
-        ///////example code
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         Bundle extras = getIntent().getExtras();
 
-        if(extras != null) {
-            setAdmin_mode( (boolean) extras.get("Admin_Mode"));
+        if (extras != null) {
+            setAdmin_mode((boolean) extras.get("Admin_Mode"));
 
         }
-        if(isAdmin_mode() == true){
+        if (isAdmin_mode() == true) {
 
 
             Menu nav_Menu = navigationView.getMenu();
@@ -112,8 +79,11 @@ public class AboutUsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        database = FirebaseDatabase.getInstance();
 
-        getImages();
+        prepareData();
+
+
     }
 
     @Override
@@ -153,16 +123,16 @@ public class AboutUsActivity extends AppCompatActivity
             finish();
             openLogin();
 
-        }else if(id == R.id.nav_marathon){
+        } else if (id == R.id.nav_marathon) {
             finish();
             openMarathon();
-        }else if(id == R.id.nav_sign_out){
+        } else if (id == R.id.nav_sign_out) {
             setAdmin_mode(false);
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             intent.putExtra("Admin_Mode", isAdmin_mode());
             finish();
             startActivity(intent);
-        } else if(id == R.id.nav_admin_panel){
+        } else if (id == R.id.nav_admin_panel) {
             finish();
             openAdminPanel();
         }
@@ -172,34 +142,35 @@ public class AboutUsActivity extends AppCompatActivity
         return true;
     }
 
-    public void  openAdminPanel(){
+    public void openAdminPanel() {
         Intent intent = new Intent(getBaseContext(), AdminPanelActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
 
     }
 
-    public void openLogin(){
+    public void openLogin() {
 
         Intent intent = new Intent(getBaseContext(), Login.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
-    public  void openContactUs() {
+
+    public void openContactUs() {
 
         Intent intent = new Intent(getBaseContext(), ContactUsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
 
-    public  void openEvents() {
+    public void openEvents() {
 
         Intent intent = new Intent(getBaseContext(), AlbumActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
 
-    public  void openMarathon() {
+    public void openMarathon() {
         Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
@@ -214,80 +185,28 @@ public class AboutUsActivity extends AppCompatActivity
     }
 
 
-    private void getImages(){
+    private void prepareData() {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         DatabaseReference myRef = database.getReference().child("aboutUsPage").child("agudaOfficeProfessionalSkills");
-
-
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                //In this case, "shalom" will be stored in mName
-
-
-
-                    Data data = snapshot.getValue(Data.class);
-                    list.add(data);
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-        System.out.println("hellohello iti\t" + list.get(0).getImageUrl());
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-/*
-        mImages.add(name);
-        mTexts.add(img);
-
-        mImages.add("");
-        mTexts.add(name);
-
-        mImages.add("");
-        mTexts.add(name);
-
-        mImages.add("");
-        mTexts.add("Anas");
-*/
-        initRecyclerView();
-
-    }
-
-    private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = findViewById(R.id.recycler_View);
-        recyclerView.setLayoutManager(layoutManager);
-        //AboutUsRecycle adapter = new AboutUsRecycle(this, mTexts, mImages);
-        //ecyclerView.setAdapter(adapter);
-    }
-
-    public void getDataFromFireBase(DatabaseReference myRef , String from, final int id){
-
-        myRef.child(from).addValueEventListener(new ValueEventListener() {
-            @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(id == R.id.textimg) {
-                    TextView text = (TextView) findViewById(id);
-                    text.setText((String) dataSnapshot.getValue());
 
-                }
+                ArrayList<CycleObject> recyclObjectList = new ArrayList<>();
+                layoutManager = new LinearLayoutManager(contex, LinearLayoutManager.HORIZONTAL, false);
 
-                if(id == R.id.image_view){
-                    CircleImageView img = (CircleImageView)findViewById(R.id.image_view);
-                    img.setImageURI(Uri.parse((String) dataSnapshot.getValue()));
+                recyclerView = findViewById(R.id.recycler_View);
 
-                    System.out.println("hellohello itaaaaai\t" +(String) dataSnapshot.getValue());
-                }
+
+
+                aboutUsRecycle = new AboutUsRecycle(recyclObjectList, contex);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(aboutUsRecycle);
+                updateDate(dataSnapshot ,  recyclObjectList);
+                System.out.println("wow\t" + recyclObjectList);
+                aboutUsRecycle.notifyDataSetChanged();
             }
 
             @Override
@@ -297,41 +216,23 @@ public class AboutUsActivity extends AppCompatActivity
         });
 
     }
-public class Data{
-        private String imageUrl;
-        private String namee;
-        private String profession;
 
-    public Data(String imageUrl, String namee, String profession) {
-        this.imageUrl = imageUrl;
-        this.namee = namee;
-        this.profession = profession;
-    }
+    public void  updateDate(DataSnapshot dataSnapshot ,  ArrayList<CycleObject> recyclObjectList){
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+        for(DataSnapshot ds: dataSnapshot.getChildren()){
+            CycleObject cycleObject = new CycleObject();
+            cycleObject.setDes((String) ds.child("name").getValue());
+            cycleObject.setImageURL((String)ds.child("imageUrl").getValue() );
+            cycleObject.setSkill((String)ds.child("profession").getValue());
+            System.out.println("shalom\t"+ cycleObject);
+            recyclObjectList.add(cycleObject);
+            aboutUsRecycle.notifyDataSetChanged();
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+            //System.out.println("shalom\t"+ cycleObject.getImageURL());
+        }
 
-    public String getNamee() {
-        return namee;
-    }
 
-    public void setNamee(String namee) {
-        this.namee = namee;
     }
-
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-}
 
 
 }
