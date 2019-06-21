@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,12 +36,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 public class AboutUsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener{
 
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private AboutUsRecycle aboutUsRecycle;
-
+    TextView yor;
     FirebaseDatabase database;
     Context contex = this;
 
@@ -234,5 +235,14 @@ public class AboutUsActivity extends AppCompatActivity
 
     }
 
-
+    @Override
+    public void onClick(View v) {
+      /*  Intent mail;
+        switch (v.getId()){
+            case R.id.yor :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","yor.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+        }*/
+    }
 }
