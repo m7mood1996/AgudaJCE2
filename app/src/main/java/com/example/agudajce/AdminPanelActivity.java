@@ -1,5 +1,6 @@
 package com.example.agudajce;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -22,15 +23,24 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -40,17 +50,36 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class AdminPanelActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+
     private boolean admin_mode = false;
     private final int PICK_IMAGE_REQUEST = 71;
     Button submet_changes,delete_member,btnchoose,btnAddMember;
     ImageView imageChoosen;
+
+
     FirebaseDatabase database ;
     DatabaseReference myRef ;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+
+
     Spinner spinner;
     Uri filePath;
+
+    TextView name;
+    TextView job;
+    TextView jobE;
+
+    String nameString ;
+    String  jobString ;
+    String jobEString ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +121,23 @@ public class AdminPanelActivity extends AppCompatActivity
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+        storage =FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+
         spinner = findViewById(R.id.spannerdlt);
         AgudaMembertoDelete();
+
+
         imageChoosen = findViewById(R.id.phoChoosen);
         delete_member = findViewById(R.id.delete_member);
+
+
+        name = findViewById(R.id.newname);
+        job = findViewById(R.id.job);
+        jobE = findViewById(R.id.jobE);
+
+
         delete_member.setOnClickListener(this);
         btnchoose = findViewById(R.id.choosePho);
         btnchoose.setOnClickListener(this);
@@ -454,25 +496,150 @@ public class AdminPanelActivity extends AppCompatActivity
     }
 
     public void AddMemberHandler(){
-        TextView name;
-        TextView job;
-        TextView jobE;
 
-        name = findViewById(R.id.newname);
-        job = findViewById(R.id.job);
-        jobE = findViewById(R.id.jobE);
+        TextView nameErorr = findViewById(R.id.nameError);
+        TextView jobError = findViewById(R.id.jobError);
+        TextView jobEError = findViewById(R.id.jobEError);
+        TextView imageError = findViewById(R.id.ImageError);
 
-        String nameString = name.getText().toString();
-        String  jobString = job.getText().toString();
-        String jobEString = jobE.getText().toString();
 
-        if(nameString.isEmpty() == true){
+
+        nameString = name.getText().toString();
+        jobString = job.getText().toString();
+        jobEString = jobE.getText().toString();
+
+        boolean add = true;
+
+        if(nameString.length() == 0){
+
+            nameErorr.setText("Error, please enter a name");
+            add = false;
+        }
+        else{
+
+            nameErorr.setText("");
+            add = true;
+        }
+        if(jobString.isEmpty() == true){
+
+            jobError.setText("Error, please enter a job");
+            add = false;
+        }
+        else{
+            jobError.setText("");
+            add = true;
+        }
+        if(jobEString.isEmpty() == true){
+            jobEError.setText("Error, please enter a job in english");
+            add = false;
+        }
+        else if(isEnglish(jobEString) == false){
+            jobEError.setText("Error, job in english must be only in english charcters");
+            add = false;
+
+        }
+        else{
+            jobEError.setText("");
+            add = true;
+
+        }
+
+        if(filePath == null){
+            imageError.setText("Error, Please select a photo");
+            add = false;
+
+        }
+        else{
+            imageError.setText("");
+            add = true;
+
+        }
+        if(add == true){
+            nameErorr.setText("");
+            jobError.setText("");
+            jobEError.setText("");
+            imageError.setText("");
+
+            AddnewMember();
+
+
+
+        }
+
+
+    }
+
+
+    public void AddnewMember(){
+        if(filePath != null){
+
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("uploading...");
+            progressDialog.show();
+
+            final StorageReference ref = storageReference.child(UUID.randomUUID().toString());
+            ref.putFile(filePath).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    progressDialog.dismiss();
+                    Toast.makeText(AdminPanelActivity.this,"uploaded",Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(AdminPanelActivity.this,"Faild" + e.getMessage(),Toast.LENGTH_LONG).show();
+
+
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded " + (int) progress);
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            addMembertofirebase(uri);
+                        }
+                    });
+
+                }
+            });
+
 
         }
 
 
 
 
+    }
 
+    public void  addMembertofirebase(Uri uri){
+
+        String url = uri.toString();
+        DatabaseReference mDatabase = (FirebaseDatabase.getInstance().getReference()).child("aboutUsPage").child("agudaOfficeProfessionalSkills").child(jobEString);
+        mDatabase.child("imageUrl").setValue(url);
+        mDatabase.child("name").setValue(nameString);
+        mDatabase.child("professio").setValue(jobString);
+    }
+
+
+
+
+
+
+    public boolean isEnglish(String s){
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
+                return false;
+            }
+        }
+        return true;
     }
 }
