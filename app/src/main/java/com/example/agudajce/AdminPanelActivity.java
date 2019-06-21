@@ -1,7 +1,14 @@
 package com.example.agudajce;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -12,24 +19,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AdminPanelActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private boolean admin_mode = false;
-    Button submet_changes;
+    private final int PICK_IMAGE_REQUEST = 71;
+    Button submet_changes,delete_member,btnchoose,btnAddMember;
+    ImageView imageChoosen;
     FirebaseDatabase database ;
     DatabaseReference myRef ;
+    Spinner spinner;
+    Uri filePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +92,15 @@ public class AdminPanelActivity extends AppCompatActivity
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+        spinner = findViewById(R.id.spannerdlt);
+        AgudaMembertoDelete();
+        imageChoosen = findViewById(R.id.phoChoosen);
+        delete_member = findViewById(R.id.delete_member);
+        delete_member.setOnClickListener(this);
+        btnchoose = findViewById(R.id.choosePho);
+        btnchoose.setOnClickListener(this);
+        btnAddMember = findViewById(R.id.btnAddMember);
+        btnAddMember.setOnClickListener(this);
     }
 
     @Override
@@ -174,6 +204,16 @@ public class AdminPanelActivity extends AppCompatActivity
 
             case R.id.submet_changes_Contact_us:
                 updateFireBase();
+                break;
+            case R.id.delete_member:
+                deleteAgudaMember();
+                break;
+            case R.id.choosePho:
+                getPhotofromphone();
+                break;
+
+            case R.id.btnAddMember:
+                AddMemberHandler();
                 break;
 
             default:
@@ -312,6 +352,127 @@ public class AdminPanelActivity extends AppCompatActivity
     public void updatedayTime(String to,String newTime){
 
         myRef.child(to).setValue(newTime);
+
+    }
+
+    public void AgudaMembertoDelete(){
+        myRef.child("aboutUsPage").child("agudaOfficeProfessionalSkills").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final List<String> namelist = new ArrayList<String>();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //Getting the data from snapshot
+                    String name = (String) postSnapshot.child("name").getValue();
+                    namelist.add(name);
+
+
+                    // Creating adapter for spinner
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AdminPanelActivity.this, android.R.layout.simple_spinner_item, namelist);
+                    // Drop down layout style - list view with radio button
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    // attaching data adapter to spinner
+                    spinner.setAdapter(dataAdapter);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+    }
+
+    public void deleteAgudaMember(){
+
+
+        myRef.child("aboutUsPage").child("agudaOfficeProfessionalSkills").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String text = spinner.getSelectedItem().toString();
+                System.out.println("mahmood text\t"+ text);
+                String id = "";
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    //Getting the data from snapshot
+                    String name = (String) postSnapshot.child("name").getValue();
+                    System.out.println("mahmood name\t\t "+ name);
+                    if (name == text){
+                        id = postSnapshot.getKey();
+                        System.out.println("mahmood id\t"+ id);
+
+                    }
+                }
+                myRef.child("aboutUsPage").child("agudaOfficeProfessionalSkills").child(id).setValue(null);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+
+
+    public void getPhotofromphone(){
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture") ,PICK_IMAGE_REQUEST);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data !=null && data.getData() != null ){
+            filePath = data.getData();
+
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
+                imageChoosen.setImageBitmap(bitmap);
+            }
+            catch (IOException e){
+                e.printStackTrace();
+
+            }
+
+        }
+
+    }
+
+    public void AddMemberHandler(){
+        TextView name;
+        TextView job;
+        TextView jobE;
+
+        name = findViewById(R.id.newname);
+        job = findViewById(R.id.job);
+        jobE = findViewById(R.id.jobE);
+
+        String nameString = name.getText().toString();
+        String  jobString = job.getText().toString();
+        String jobEString = jobE.getText().toString();
+
+        if(nameString.isEmpty() == true){
+
+        }
+
+
+
+
 
     }
 }
