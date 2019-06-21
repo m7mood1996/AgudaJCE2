@@ -1,22 +1,497 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
 tools:context=".AboutUsActivity"
     android:layout_marginTop="56dp"
     android:backgroundTint="#1f1f1f"
 tools:showIn="@layout/app_bar_aboutusactivity"
     android:background="#f2f2f2"
     >
-
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/recycler_View"
         android:orientation="horizontal">
-
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="140dp"
+        >
+        <!--LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAlignment="center"
+                android:text="מי אנחנו "
+                android:textStyle="bold"
+                android:textColor="#f9c47f"
+                android:textSize="30dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="אגודת הסטודנטים היא הגוף המייצג את הסטודנטים במכללה בפני הנהלת המכללה בנושאים אקדמיים ואחרים, ופועלת בשיתוף פעולה עם המכללה ועם ארגונים נוספים , אגודת הסטודנטים שמה בראש ובראשונה את הסטודנטים ודואגת להם במגוון מישורים: אקדמיה ,רווחה, תרבות פנים וחוץ ,יזמות ,ספורט, ועוד."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מחלקת האקדמיה : דואגת לכל הקשור בפן האקדמי, טיפול בבעיות מול הסגל האקדמי ופיקוח כי חוקי התקנון מתקיימים."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מחלקת רווחה : פועלת לרווחת הסטודנטים תוך שמירה על תנאים סוציאליים במכללה ומחוצה לה."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מחלקת תרבות : דואגת להווי החברתי במכללה , גיבוש הסטודנטים , ימי כיף מסיבות וכו'."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מחלקת יזמות : אחראית על קידום וטיפוח נושא היזמות הטכנולוגית והחדשנות בקרב סטודנטים ,קיום האקתונים וסדנאות יזמות בשיתוף מול האקסלרטור וארגונים נוספים."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מחלקת לוגיסטיקה ואוכלוסיות : אחראית על מתן שירותים מיוחדים לכלל האוכלוסיות במכללה , בנוסף , מטרתה היא לשלב את כולם בכל פעילויות האגודה , לשמוע את כולם ולענות על צורכיהם."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מחלקת ספורט : מספקת שלל פעילויות אשר יעלו לסדר היום את חשיבות הספורט לאורך חיים בריא וטוב."
+                android:textColor="#f9c47f"
+                android:textDirection="rtl" />
+        </LinearLayout-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textAlignment="center"
+                        android:text="מי אנחנו "
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textSize="30dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="אגודת הסטודנטים היא הגוף המייצג את הסטודנטים במכללה בפני הנהלת המכללה בנושאים אקדמיים ואחרים, ופועלת בשיתוף פעולה עם המכללה ועם ארגונים נוספים , אגודת הסטודנטים שמה בראש ובראשונה את הסטודנטים ודואגת להם במגוון מישורים: אקדמיה ,רווחה, תרבות פנים וחוץ ,יזמות ,ספורט, ועוד."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="מחלקת האקדמיה : דואגת לכל הקשור בפן האקדמי, טיפול בבעיות מול הסגל האקדמי ופיקוח כי חוקי התקנון מתקיימים."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="מחלקת רווחה : פועלת לרווחת הסטודנטים תוך שמירה על תנאים סוציאליים במכללה ומחוצה לה."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="מחלקת תרבות : דואגת להווי החברתי במכללה , גיבוש הסטודנטים , ימי כיף מסיבות וכו'."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="מחלקת יזמות : אחראית על קידום וטיפוח נושא היזמות הטכנולוגית והחדשנות בקרב סטודנטים ,קיום האקתונים וסדנאות יזמות בשיתוף מול האקסלרטור וארגונים נוספים."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="מחלקת לוגיסטיקה ואוכלוסיות : אחראית על מתן שירותים מיוחדים לכלל האוכלוסיות במכללה , בנוסף , מטרתה היא לשלב את כולם בכל פעילויות האגודה , לשמוע את כולם ולענות על צורכיהם."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="מחלקת ספורט : מספקת שלל פעילויות אשר יעלו לסדר היום את חשיבות הספורט לאורך חיים בריא וטוב."
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text='נציגי אגודת הסטודנטים לשנת הלימודים תשע"ט : '
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="איתי גבאי, יו“ר :"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="yor.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="נוי לוי, סיו“ר,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="syor.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="נעמי מטרי, גזברית,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="gizbarut.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="דולי אזולאי, מנהלת המשרד,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="office.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="חן פרידמן, רמ“ח דוברות והסברה,"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="dover.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="עמית ברזני, רמ“ח אקדמיה,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="academy.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="עלי חרבאוי, רמ“ח לוגיסטיקה ואוכלוסיות,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=" populog.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="ספיר מרדכי, רמ“ח רווחה,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="revaha.jce@gmail.com "
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="דניאל גודמן, רמ“ח תרבות,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="tarbut.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="אליאור יעקב, רמ“ח ספורט,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="sport.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="קובי אמסלם , רמ“ח יזמות,"
+                        android:textStyle="bold"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=" hackathon.jce@gmail.com"
+                        android:textColor="#f9c47f"
+                        android:textDirection="rtl" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
     </RelativeLayout>
+
+
 

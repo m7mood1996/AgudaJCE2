@@ -297,7 +297,7 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
 
                 //((String) snapshot.getValue());
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", "email.@gmail.com", null));
+                        "mailto", "office.jce@gmail.com", null));
 
                 startActivity(Intent.createChooser(intent, "Choose an Email client :"));
 
