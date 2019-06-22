@@ -381,7 +381,7 @@
                 android:id="@+id/submet_changes_Contact_us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="submet"/>
+                android:text="בצע"/>
         </LinearLayout>
 
 
@@ -425,7 +425,7 @@
                             android:id="@+id/delete_member"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="delete" />
+                            android:text="מחק" />
 
                         <Spinner
                             android:id="@+id/spannerdlt"
@@ -649,7 +649,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:id="@+id/choosePho"
-                                        android:text="choose"/>
+                                        android:text="בחר"/>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -689,7 +689,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity=""
                             android:id="@+id/btnAddMember"
-                            android:text="להוספה"/>
+                            android:text="הוסף"/>
 
 
 

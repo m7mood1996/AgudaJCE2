@@ -42,6 +42,16 @@ public class AboutUsActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private AboutUsRecycle aboutUsRecycle;
     TextView yor;
+    TextView syor;
+    TextView gizbarut;
+    TextView office;
+    TextView dover;
+    TextView academy;
+    TextView populog;
+    TextView revaha;
+    TextView tarbut;
+    TextView sport;
+    TextView hackathon;
     FirebaseDatabase database;
     Context contex = this;
 
@@ -54,8 +64,30 @@ public class AboutUsActivity extends AppCompatActivity
         setContentView(R.layout.activity_about_us);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        ////Define the TextView of the aguda members's email
+        yor = findViewById(R.id.yor);
+        syor = findViewById(R.id.syor);
+        gizbarut = findViewById(R.id.gizbarut);
+        office = findViewById(R.id.office);
+        dover = findViewById(R.id.dover);
+        academy = findViewById(R.id.academy);
+        populog = findViewById(R.id.populog);
+        revaha = findViewById(R.id.revaha);
+        tarbut = findViewById(R.id.tarbut);
+        sport = findViewById(R.id.sport);
+        hackathon = findViewById(R.id.hackathon);
+        yor.setOnClickListener(this);
+        syor.setOnClickListener(this);
+        gizbarut.setOnClickListener(this);
+        office.setOnClickListener(this);
+        dover.setOnClickListener(this);
+        academy.setOnClickListener(this);
+        populog.setOnClickListener(this);
+        revaha.setOnClickListener(this);
+        tarbut.setOnClickListener(this);
+        sport.setOnClickListener(this);
+        hackathon.setOnClickListener(this);
+        /////////////////////////////
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -237,12 +269,54 @@ public class AboutUsActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-      /*  Intent mail;
+        Intent mail;
         switch (v.getId()){
             case R.id.yor :
                 mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","yor.jce@gmail.com",null));
                 startActivity(Intent.createChooser(mail, "Choose an Email client :"));
                 break;
-        }*/
+            case R.id.syor :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","syor.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.gizbarut :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","gizbarut.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.office :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","office.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.dover :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","dover.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.academy :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","academy.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.populog :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","populog.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.revaha :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","revaha.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.tarbut :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","tarbut.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.sport :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","sport.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            case R.id.hackathon :
+                mail = new Intent(Intent.ACTION_SENDTO,Uri.fromParts("mailto","hackathon.jce@gmail.com",null));
+                startActivity(Intent.createChooser(mail, "Choose an Email client :"));
+                break;
+            default:
+                break;
+        }
     }
 }
