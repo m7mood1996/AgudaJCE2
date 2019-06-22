@@ -38,11 +38,11 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:text="מי אנחנו "
                         android:textAlignment="center"
                         android:textColor="#f9c47f"
@@ -52,9 +52,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -67,9 +65,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -82,9 +78,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -97,9 +91,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -112,9 +104,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -127,9 +117,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -142,9 +130,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -157,9 +143,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -173,9 +157,7 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -189,28 +171,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:contextClickable="true"
-                    android:textDirection="ltr">
+                    android:textDirection="rtl">
 
                     <TextView
                         android:id="@+id/yor"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="yor.jce@gmail.com"
-
+                        android:layout_marginLeft="200dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr"
-                        android:textAlignment="textEnd"
-                        android:gravity="end" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -223,26 +198,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/syor"
                         android:text="syor.jce@gmail.com"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="200dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -255,26 +225,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/gizbarut"
                         android:text="gizbarut.jce@gmail.com"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="180dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -287,26 +252,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="office.jce@gmail.com"
                         android:id="@+id/office"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="200dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -319,26 +279,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="dover.jce@gmail.com"
                         android:id="@+id/dover"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="200dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -351,26 +306,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="academy.jce@gmail.com"
                         android:id="@+id/academy"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="180dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -383,26 +333,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text=" populog.jce@gmail.com"
                         android:id="@+id/populog"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="180dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -415,26 +360,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="revaha.jce@gmail.com "
                         android:id="@+id/revaha"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="180dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -447,26 +387,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="tarbut.jce@gmail.com"
                         android:id="@+id/tarbut"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="200dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -479,26 +414,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="sport.jce@gmail.com"
                         android:id="@+id/sport"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="200dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -511,26 +441,21 @@ tools:showIn="@layout/app_bar_aboutusactivity"
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text=" hackathon.jce@gmail.com"
                         android:id="@+id/hackathon"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
+                        android:layout_marginLeft="160dp"
                         android:textColor="#f9c47f"
-                        android:textDirection="ltr" />
+                        android:textDirection="rtl" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
