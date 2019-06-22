@@ -6,7 +6,29 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Login"
+
+    android:hapticFeedbackEnabled="true"
     tools:showIn="@layout/app_bar_login">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:filterTouchesWhenObscured="false"
+            android:fitsSystemWindows="false"
+            android:hapticFeedbackEnabled="false"
+            android:isScrollContainer="false"
+            android:keepScreenOn="false"
+            android:longClickable="false"
+            android:saveEnabled="false"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:src="@drawable/loginscreenbckgrnd" />
+
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -22,7 +44,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="כניסה"
+
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,6 +197,8 @@
 
 
 </LinearLayout>
+
+    </FrameLayout>
 
 
 </android.support.constraint.ConstraintLayout>

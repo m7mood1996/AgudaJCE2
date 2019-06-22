@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
         GraphRequest request = GraphRequest.newGraphPathRequest(
                 token,
-                "/1087780278090610/posts",
+                "/597726260353610/posts",
                 new GraphRequest.Callback() {
                     @Override
                     public void onCompleted(GraphResponse response) {
@@ -284,6 +284,7 @@ public class MainActivity extends AppCompatActivity
                         catch (JSONException e) {
 
                             e.printStackTrace();
+
 
                         }
 

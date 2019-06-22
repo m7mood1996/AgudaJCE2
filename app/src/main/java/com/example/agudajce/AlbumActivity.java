@@ -82,7 +82,7 @@ public class AlbumActivity extends AppCompatActivity
 
         GraphRequest request = GraphRequest.newGraphPathRequest(
                 token,
-                "/1095717480630223",
+                "/597975133662056",
                 new GraphRequest.Callback() {
                     @Override
                     public void onCompleted(GraphResponse response) {
