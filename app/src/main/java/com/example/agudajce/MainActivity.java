@@ -2,6 +2,7 @@ package com.example.agudajce;
 
 import android.content.Intent;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -47,6 +49,16 @@ public class MainActivity extends AppCompatActivity
     private MyAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        String languageToLoad  = "en"; // your language
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
 
         String accessToken = getString(R.string.accessToken);;
         String appId = getString(R.string.appId);
@@ -335,4 +347,6 @@ public class MainActivity extends AppCompatActivity
     public void setAdmin_mode(boolean admin_mode) {
         this.admin_mode = admin_mode;
     }
+
+
 }
