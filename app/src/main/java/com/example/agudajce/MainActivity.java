@@ -340,7 +340,10 @@ public class MainActivity extends AppCompatActivity
 
 
 
-                        if(videourl.isEmpty() == false && videourl.contains("video") == false)
+
+
+                        if(videourl.isEmpty() == false && videourl.isEmpty() == true)
+
                             videourl = "";
                         else {
                            // pic = "";
