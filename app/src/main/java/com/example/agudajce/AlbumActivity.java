@@ -1,6 +1,8 @@
 package com.example.agudajce;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -90,24 +92,24 @@ public class AlbumActivity extends AppCompatActivity
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(galleryAdapter);
+        if(isNetworkConnected()) {
+            GraphRequest request = GraphRequest.newGraphPathRequest(
+                    token,
+                    "/597975133662056",
+                    new GraphRequest.Callback() {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            JSONObject jsonObject = response.getJSONObject();
 
-        GraphRequest request = GraphRequest.newGraphPathRequest(
-                token,
-                "/597975133662056",
-                new GraphRequest.Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse response) {
-                        JSONObject jsonObject = response.getJSONObject();
+                            prepareData(jsonObject);
+                        }
+                    });
 
-                        prepareData(jsonObject);
-                    }
-                });
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "photos{images}");
-        request.setParameters(parameters);
-        request.executeAsync();
-
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "photos{images}");
+            request.setParameters(parameters);
+            request.executeAsync();
+        }
 
 
 
@@ -298,5 +300,11 @@ public class AlbumActivity extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }

@@ -4,16 +4,17 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:background="?android:attr/selectableItemBackground"
-android:clickable="true"
-android:focusable="true"
-android:orientation="vertical"
-android:paddingBottom="10dp"
-android:paddingTop="10dp"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:background="@drawable/boarder"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -57,11 +58,7 @@ android:paddingRight="@dimen/activity_horizontal_margin">
         android:autoLink="web"
         android:linksClickable="true"
         android:textSize="16dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp"
-        android:paddingLeft="1dp"
-        android:paddingRight="1dp"
-        android:background="@drawable/boarder"
+
         android:textStyle="bold" />
 
 

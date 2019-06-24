@@ -1,9 +1,11 @@
 package com.example.agudajce;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 
 import android.os.Bundle;
@@ -129,26 +131,26 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(mAdapter);
 
 
+        if(isNetworkConnected()) {
+            GraphRequest request = GraphRequest.newGraphPathRequest(
+                    token,
+                    "/597726260353610/posts",
+                    new GraphRequest.Callback() {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            JSONObject jsonObject = response.getJSONObject();
 
-        GraphRequest request = GraphRequest.newGraphPathRequest(
-                token,
-                "/597726260353610/posts",
-                new GraphRequest.Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse response) {
-                       JSONObject jsonObject = response.getJSONObject();
-
-                        prepareData(jsonObject);
+                            prepareData(jsonObject);
 
 
-                    }
-                });
+                        }
+                    });
 
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
-        request.setParameters(parameters);
-        request.executeAsync();
-
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
+            request.setParameters(parameters);
+            request.executeAsync();
+        }
 
 
 
@@ -392,5 +394,11 @@ public class MainActivity extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }
