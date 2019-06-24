@@ -1,8 +1,10 @@
 package com.example.agudajce;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 
 import android.os.Bundle;
@@ -109,27 +111,27 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(mAdapter);
 
 
+        if(isNetworkConnected()) {
+            GraphRequest request = GraphRequest.newGraphPathRequest(
+                    token,
+                    "/597726260353610/posts",
+                    new GraphRequest.Callback() {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            JSONObject jsonObject = response.getJSONObject();
 
-        GraphRequest request = GraphRequest.newGraphPathRequest(
-                token,
-                "/597726260353610/posts",
-                new GraphRequest.Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse response) {
-                       JSONObject jsonObject = response.getJSONObject();
-
-                        prepareData(jsonObject);
-
-
-                    }
-                });
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
-        request.setParameters(parameters);
-        request.executeAsync();
+                            prepareData(jsonObject);
 
 
+                        }
+                    });
+
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
+            request.setParameters(parameters);
+            request.executeAsync();
+
+        }
 
 
      //   prepareData();
@@ -309,15 +311,18 @@ public class MainActivity extends AppCompatActivity
                         }
                         try{
                             videourl = jsonObject.getJSONArray("data").getJSONObject(i).getJSONObject("attachments").getJSONArray("data").getJSONObject(0).getJSONObject("media").getString("source");
+
                         }
                         catch (JSONException e){
+
                             videourl = "";
                         }
 
 
 
 
-                        if(videourl.isEmpty() == false && videourl.contains("video") == false)
+                        if(videourl.isEmpty() == false && videourl.isEmpty() == true)
+
                             videourl = "";
                         else {
                            // pic = "";
@@ -349,4 +354,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
 }
