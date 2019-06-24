@@ -37,7 +37,11 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 public class AboutUsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener{
-
+    FirebaseDatabase database;
+    FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database1.getReference();
+    String skarim = "";
+    String marathon = "";
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private AboutUsRecycle aboutUsRecycle;
@@ -52,7 +56,6 @@ public class AboutUsActivity extends AppCompatActivity
     TextView tarbut;
     TextView sport;
     TextView hackathon;
-    FirebaseDatabase database;
     Context contex = this;
 
 
@@ -60,6 +63,7 @@ public class AboutUsActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getValue();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -159,6 +163,9 @@ public class AboutUsActivity extends AppCompatActivity
         } else if (id == R.id.nav_marathon) {
             finish();
             openMarathon();
+        }else if (id == R.id.skarim) {
+            finish();
+            openSkarim();
         } else if (id == R.id.nav_sign_out) {
             setAdmin_mode(false);
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -204,7 +211,12 @@ public class AboutUsActivity extends AppCompatActivity
     }
 
     public void openMarathon() {
-        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(marathon));
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
+    }
+    public  void openSkarim() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(skarim));
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
@@ -318,5 +330,30 @@ public class AboutUsActivity extends AppCompatActivity
             default:
                 break;
         }
+    }
+    public void getValue(){
+        ref.child("links").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            skarim = (String) dataSnapshot.child("skarim").getValue();
+                            marathon = (String) dataSnapshot.child("marathon").getValue();
+                            System.out.println("Let me see you friend\t" + skarim);
+                            System.out.println("Allahu Akbar \t" + marathon);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println(" it's null.");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.example.agudajce;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -21,10 +22,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Login extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference();
+    String skarim = "";
+    String marathon = "";
     private boolean admin_mode = false;
     TextView username;
     TextView password;
@@ -34,6 +44,7 @@ public class Login extends AppCompatActivity
     FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getValue();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -120,11 +131,12 @@ public class Login extends AppCompatActivity
         } else if (id == R.id.nav_marathon) {
             finish();
             openMarathon();
-
+        }else if (id == R.id.skarim) {
+            finish();
+            openSkarim();
         }else if(id == R.id.nav_event){  //should refactor to nav_album
             finish();
             openAlbum();
-
         }else if(id == R.id.nav_sign_out){
             setAdmin_mode(false);
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -179,7 +191,12 @@ public class Login extends AppCompatActivity
     public  void openMarathon() {
 
 
-        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(marathon));
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
+    }
+    public  void openSkarim() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(skarim));
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
@@ -244,6 +261,31 @@ public class Login extends AppCompatActivity
         this.admin_mode = admin_mode;
     }
 
+    public void getValue(){
+        ref.child("links").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            skarim = (String) dataSnapshot.child("skarim").getValue();
+                            marathon = (String) dataSnapshot.child("marathon").getValue();
+                            System.out.println("Let me see you friend\t" + skarim);
+                            System.out.println("Allahu Akbar \t" + marathon);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println(" it's null.");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
 
 
 }

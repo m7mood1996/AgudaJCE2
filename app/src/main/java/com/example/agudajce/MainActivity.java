@@ -1,14 +1,14 @@
 package com.example.agudajce;
 
-import android.content.Context;
+import android.content.ClipData;
 import android.content.Intent;
 
 import android.content.res.Configuration;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 
 import android.os.Bundle;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,13 +25,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
 
 import com.facebook.AccessToken;
 
 import com.facebook.GraphRequest;
 
 import com.facebook.GraphResponse;
+import com.google.firebase.database.DatabaseReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,14 +55,22 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+   //////////////
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference();
+    String skarim = "";
+    String marathon = "";
+    /////////
     private boolean admin_mode = false;
     private List<Post> postList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MyAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
+        //String str="";
+        //System.out.println("I'm hereeeee look : " + ref);
+        getValue();
         String languageToLoad  = "en"; // your language
         Locale locale = new Locale(languageToLoad);
         Locale.setDefault(locale);
@@ -111,27 +129,27 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(mAdapter);
 
 
-        if(isNetworkConnected()) {
-            GraphRequest request = GraphRequest.newGraphPathRequest(
-                    token,
-                    "/597726260353610/posts",
-                    new GraphRequest.Callback() {
-                        @Override
-                        public void onCompleted(GraphResponse response) {
-                            JSONObject jsonObject = response.getJSONObject();
 
-                            prepareData(jsonObject);
+        GraphRequest request = GraphRequest.newGraphPathRequest(
+                token,
+                "/597726260353610/posts",
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                       JSONObject jsonObject = response.getJSONObject();
+
+                        prepareData(jsonObject);
 
 
-                        }
-                    });
+                    }
+                });
 
-            Bundle parameters = new Bundle();
-            parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
-            request.setParameters(parameters);
-            request.executeAsync();
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "full_picture,message,attachments{target,url,type,media}");
+        request.setParameters(parameters);
+        request.executeAsync();
 
-        }
+
 
 
      //   prepareData();
@@ -141,9 +159,6 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -164,6 +179,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -180,6 +196,8 @@ public class MainActivity extends AppCompatActivity
             openAboutus();
         } else if (id == R.id.nav_marathon) {
             openMarathon();
+        }else if (id == R.id.skarim) {
+            openSkarim();
         } else if(id == R.id.nav_sign_out){
             setAdmin_mode(false);
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -230,10 +248,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
     public  void openMarathon() {
-        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(marathon));
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
-
+    }
+    public  void openSkarim() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(skarim));
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
     }
 
 
@@ -296,9 +318,7 @@ public class MainActivity extends AppCompatActivity
 
                         }
                         catch (JSONException e) {
-
                             e.printStackTrace();
-
 
                         }
 
@@ -306,23 +326,19 @@ public class MainActivity extends AppCompatActivity
                             pic = jsonObject.getJSONArray("data").getJSONObject(i).getString("full_picture");
                         }
                         catch (JSONException e){
-                            pic ="";
-
+                            pic = "https://i.imgur.com/rtuYpnp.jpg";
                         }
                         try{
                             videourl = jsonObject.getJSONArray("data").getJSONObject(i).getJSONObject("attachments").getJSONArray("data").getJSONObject(0).getJSONObject("media").getString("source");
-
                         }
                         catch (JSONException e){
-
                             videourl = "";
                         }
 
 
 
 
-                        if(videourl.isEmpty() == false && videourl.isEmpty() == true)
-
+                        if(videourl.isEmpty() == false && videourl.contains("video") == false)
                             videourl = "";
                         else {
                            // pic = "";
@@ -352,12 +368,29 @@ public class MainActivity extends AppCompatActivity
     public void setAdmin_mode(boolean admin_mode) {
         this.admin_mode = admin_mode;
     }
+    public void getValue(){
+        ref.child("links").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            skarim = (String) dataSnapshot.child("skarim").getValue();
+                            marathon = (String) dataSnapshot.child("marathon").getValue();
+                            System.out.println("Let me see you friend\t" + skarim);
+                            System.out.println("Allahu Akbar \t" + marathon);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println(" it's null.");
+                    }
+                }
+            }
 
-
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return cm.getActiveNetworkInfo() != null;
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }
