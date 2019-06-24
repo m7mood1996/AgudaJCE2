@@ -1,9 +1,9 @@
 package com.example.agudajce;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +20,11 @@ import android.view.Menu;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,13 +35,17 @@ import java.util.List;
 
 public class AlbumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference();
+    String skarim = "";
+    String marathon = "";
     private boolean admin_mode = false;
     private List<Gallery_row> gallery = new ArrayList<>();
     private RecyclerView recyclerView;
     private GalleryAdapter galleryAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        getValue();
         String accessToken = getString(R.string.accessToken);;
         String appId = getString(R.string.appId);
         String userId = getString(R.string.userId);
@@ -82,25 +91,24 @@ public class AlbumActivity extends AppCompatActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(galleryAdapter);
 
-        if(isNetworkConnected()) {
-            GraphRequest request = GraphRequest.newGraphPathRequest(
-                    token,
-                    "/597975133662056",
-                    new GraphRequest.Callback() {
-                        @Override
-                        public void onCompleted(GraphResponse response) {
-                            JSONObject jsonObject = response.getJSONObject();
+        GraphRequest request = GraphRequest.newGraphPathRequest(
+                token,
+                "/597975133662056",
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        JSONObject jsonObject = response.getJSONObject();
 
-                            prepareData(jsonObject);
-                        }
-                    });
+                        prepareData(jsonObject);
+                    }
+                });
 
-            Bundle parameters = new Bundle();
-            parameters.putString("fields", "photos{images}");
-            request.setParameters(parameters);
-            request.executeAsync();
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "photos{images}");
+        request.setParameters(parameters);
+        request.executeAsync();
 
-        }
+
 
 
     }
@@ -149,6 +157,9 @@ public class AlbumActivity extends AppCompatActivity
             finish();
             openMarathon();
 
+        }else if (id == R.id.skarim) {
+            finish();
+            openSkarim();
         }else if(id == R.id.nav_sign_out){
             setAdmin_mode(false);
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -193,9 +204,12 @@ public class AlbumActivity extends AppCompatActivity
         startActivity(intent);
     }
     public  void openMarathon() {
-
-
-        Intent intent = new Intent(getBaseContext(), MarathonsActivity.class);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(marathon));
+        intent.putExtra("Admin_Mode", isAdmin_mode());
+        startActivity(intent);
+    }
+    public  void openSkarim() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(skarim));
         intent.putExtra("Admin_Mode", isAdmin_mode());
         startActivity(intent);
     }
@@ -260,11 +274,29 @@ public class AlbumActivity extends AppCompatActivity
         this.admin_mode = admin_mode;
     }
 
+    public void getValue(){
+        ref.child("links").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            skarim = (String) dataSnapshot.child("skarim").getValue();
+                            marathon = (String) dataSnapshot.child("marathon").getValue();
+                            System.out.println("Let me see you friend\t" + skarim);
+                            System.out.println("Allahu Akbar \t" + marathon);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println(" it's null.");
+                    }
+                }
+            }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return cm.getActiveNetworkInfo() != null;
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
-
 }
