@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -64,7 +65,7 @@ public class AdminPanelActivity extends AppCompatActivity
     String marathon = "";
     private boolean admin_mode = false;
     private final int PICK_IMAGE_REQUEST = 71;
-    Button submet_changes,delete_member,btnchoose,btnAddMember;
+    Button submet_changes,delete_member,btnchoose,btnAddMember,changeMarathon,changeSkarim;
     ImageView imageChoosen;
 
 
@@ -83,12 +84,14 @@ public class AdminPanelActivity extends AppCompatActivity
     String nameString ;
     String  jobString ;
     String jobEString ;
-
+    String link1;
+    String link2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getValue();
+
         super.onCreate(savedInstanceState);
+        getValue();
 
         String languageToLoad  = "en"; // your language
         Locale locale = new Locale(languageToLoad);
@@ -132,7 +135,10 @@ public class AdminPanelActivity extends AppCompatActivity
 
         submet_changes = (Button)findViewById(R.id.submet_changes_Contact_us);
         submet_changes.setOnClickListener(this);
-
+        changeMarathon = (Button)findViewById(R.id.change_marathon);
+        changeMarathon.setOnClickListener(this);
+        changeSkarim = (Button)findViewById(R.id.change_skarim);
+        changeSkarim.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         storage =FirebaseStorage.getInstance();
@@ -198,7 +204,6 @@ public class AdminPanelActivity extends AppCompatActivity
             openAboutus();
 
         } else if (id == R.id.nav_marathon) {
-            finish();
             openMarathon();
 
         }else if (id == R.id.skarim) {
@@ -279,7 +284,12 @@ public class AdminPanelActivity extends AppCompatActivity
             case R.id.btnAddMember:
                 AddMemberHandler();
                 break;
-
+            case R.id.change_marathon:
+                changeMarathon();
+                break;
+            case R.id.change_skarim:
+                changeSkarim();
+                break;
             default:
                 break;
         }
@@ -291,9 +301,7 @@ public class AdminPanelActivity extends AppCompatActivity
 
         textView = (TextView)findViewById(R.id.NewNumber) ; //new phone number
         String newPhoneNum =  textView.getText().toString();
-
         updatePhoneNum(newPhoneNum);
-
         textView = (TextView)findViewById(R.id.NewEmail) ;  // new email
         String newEmail = textView.getText().toString();
 
@@ -688,5 +696,44 @@ public class AdminPanelActivity extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void changeMarathon(){
+        EditText editText;
+        editText = (EditText) findViewById(R.id.link1);
+        link1 = editText.getText().toString();
+        Uri url = Uri.parse(link1);
+        String link11 = url.toString();
+        if (!link11.isEmpty()){
+            if (link11.contains("https://") == false && link11.contains("http://") == false){
+                link11 = "https://" + link11;
+                ref.child("links").child("marathon").setValue(link11);
+            }
+            else {
+                ref.child("links").child("marathon").setValue(link11);
+            }
+        }
+        else
+            Toast.makeText(this,"You have to fill this field",Toast.LENGTH_LONG).show();
+    }
+
+
+    public void changeSkarim(){
+        EditText editText;
+        editText = (EditText) findViewById(R.id.link2);
+        link2 = editText.getText().toString();
+        Uri url = Uri.parse(link2);
+        String link22 = url.toString();
+        if (!link22.isEmpty()){
+            if (link22.contains("https://") == false && link22.contains("http://") == false){
+                link22 = "https://" + link22;
+                ref.child("links").child("skarim").setValue(link22);
+            }
+            else {
+                ref.child("links").child("skarim").setValue(link22);
+            }
+        }
+        else
+            Toast.makeText(this,"You have to fill this field",Toast.LENGTH_LONG).show();
     }
 }

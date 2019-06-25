@@ -205,11 +205,12 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/yor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="end"
                         android:text="yor.jce@gmail.com"
-                        android:textColor="#f9c47f"
-                        android:textDirection="ltr"
                         android:textAlignment="textEnd"
-                        android:gravity="end" />
+                        android:textColor="#0353F4"
+                        android:textDirection="ltr"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -240,7 +241,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:text="syor.jce@gmail.com"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -272,7 +274,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:text="gizbarut.jce@gmail.com"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textColor="#0353F4"
+                        android:textStyle="bold"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -304,7 +307,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/office"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textColor="#0353F4"
+                        android:textStyle="bold"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -336,7 +340,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/dover"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -368,7 +373,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/academy"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -400,7 +406,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/populog"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -432,7 +439,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/revaha"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -464,7 +472,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/tarbut"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -496,7 +505,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/sport"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 
@@ -528,7 +538,8 @@ tools:showIn="@layout/app_bar_aboutusactivity"
                         android:id="@+id/hackathon"
                         android:textAlignment="textEnd"
                         android:gravity="end"
-                        android:textColor="#f9c47f"
+                        android:textStyle="bold"
+                        android:textColor="#0353F4"
                         android:textDirection="ltr" />
                 </LinearLayout>
 

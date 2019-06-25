@@ -18,6 +18,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -45,6 +47,11 @@ public class AlbumActivity extends AppCompatActivity
     private List<Gallery_row> gallery = new ArrayList<>();
     private RecyclerView recyclerView;
     private GalleryAdapter galleryAdapter;
+
+
+    ///////////////
+    private WebView webView;
+    //////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getValue();
@@ -111,6 +118,11 @@ public class AlbumActivity extends AppCompatActivity
             request.executeAsync();
         }
 
+        /////////////
+        webView = (WebView)findViewById(R.id.gallery_webview);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("https://www.facebook.com/pg/aguda.jce/photos/?tab=albums&ref=page_internal");
+        ////////////
 
 
     }
@@ -118,7 +130,10 @@ public class AlbumActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if(webView.canGoBack()){
+            webView.goBack();
+        }
+        else if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();

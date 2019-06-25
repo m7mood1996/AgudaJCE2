@@ -16,7 +16,7 @@
         <item
             android:id="@+id/nav_marathon"
             android:icon="@drawable/marathon_icon_nav"
-            android:title="@string/menu_marathon" />
+            android:title="@string/menu_marathon"/>
         <item
             android:id="@+id/skarim"
             android:icon="@drawable/skarim_aguda"
