@@ -33,6 +33,7 @@ public class AboutUsRecycle extends RecyclerView.Adapter<AboutUsRecycle.ViewHold
     private Context mContext;
 
     public AboutUsRecycle( ArrayList<CycleObject> cycleObjects,Context mContext){
+
         this.cycleObjects = cycleObjects;
 
         this.mContext = mContext;

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#C62828"
-            app:title="גלרייה"
+            app:title="גלריית תמונות"
 
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 

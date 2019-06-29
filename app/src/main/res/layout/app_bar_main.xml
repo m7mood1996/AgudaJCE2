@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#C62828"
-            app:title="אגודת הסטודנטים"
+            app:title="אגודת הסטודנטים בעזריאלי"
 
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 

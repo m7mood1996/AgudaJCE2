@@ -56,8 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="מספר טלפון חדש"
-                />
+                android:text="מספר טלפון חדש של המשרד" />
         </LinearLayout>
 
         <LinearLayout
@@ -517,7 +516,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="שם החבר"
+                                    android:text="שם חבר חדש"
                                     android:textAlignment="center"
                                     android:textColor="#000"
                                     android:textDirection="ltr"
@@ -567,7 +566,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="תפקיד"
+                                    android:text="תפקיד באגודה"
                                     android:textAlignment="center"
                                     android:textColor="#000"
                                     android:textDirection="ltr"

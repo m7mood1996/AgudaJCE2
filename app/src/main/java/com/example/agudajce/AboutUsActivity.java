@@ -270,11 +270,12 @@ public class AboutUsActivity extends AppCompatActivity
             cycleObject.setImageURL((String)ds.child("imageUrl").getValue() );
             cycleObject.setSkill((String)ds.child("profession").getValue());
             System.out.println("shalom\t"+ cycleObject);
-            recyclObjectList.add(cycleObject);
-            aboutUsRecycle.notifyDataSetChanged();
+            //recyclObjectList.add(cycleObject);
+            recyclObjectList.add(0,cycleObject);
 
             //System.out.println("shalom\t"+ cycleObject.getImageURL());
         }
+        aboutUsRecycle.notifyDataSetChanged();
 
 
     }

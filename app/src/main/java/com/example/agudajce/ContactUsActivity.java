@@ -78,14 +78,14 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
         Button insta = (Button)findViewById(R.id.insta_logo);
         Button dropbox = (Button)findViewById(R.id.drop_logo);
         Button massenger = (Button)findViewById(R.id.massenger_logo);
-        Button whatsapp = (Button)findViewById(R.id.whatsapp_logo);
+       // Button whatsapp = (Button)findViewById(R.id.whatsapp_logo);
         Button sendmail = (Button)findViewById(R.id.gmail_logo);
         TextView phone =(TextView)findViewById(R.id.phoneNum) ;
         fb.setOnClickListener(this);
         insta.setOnClickListener(this);
         dropbox.setOnClickListener(this);
         massenger.setOnClickListener(this);
-        whatsapp.setOnClickListener(this);
+      //  whatsapp.setOnClickListener(this);
         sendmail.setOnClickListener(this);
         phone.setOnClickListener(this);
 
@@ -123,11 +123,11 @@ public class ContactUsActivity<my_String> extends AppCompatActivity
                 startActivity(brows);
                 break;
 
-            case R.id.whatsapp_logo:
+      /*      case R.id.whatsapp_logo:
                 brows = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.whatsapp.com"));
                 startActivity(brows);
                 break;
-
+      */
             case R.id.gmail_logo:
                 sendemail();
                 break;
